@@ -1,0 +1,10 @@
+.pagination
+{
+	display: inline-block;
+}
+
+.page:hover
+{
+	background-color: lightgray;
+	color: black;
+}
