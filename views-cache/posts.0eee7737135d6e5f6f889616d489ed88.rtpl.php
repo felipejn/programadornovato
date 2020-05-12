@@ -3,7 +3,8 @@
 <!-- Content -->
 <div class="container">
 	<div class="jumbotron text-center">
-		<h1>Home Admin Area</h1>
+		<h1>Posts Admin Area</h1>
 	</div>
 </div>
 <!-- Content end -->
+

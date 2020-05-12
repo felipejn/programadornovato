@@ -1,0 +1,32 @@
+
+<!-- Content -->
+<div class="container">
+	<table class="table">
+	<thead>
+		<tr>
+		<th scope="col">Id</th>
+		<th scope="col">Nome</th>
+		<th scope="col">Login</th>
+		<th scope="col">Password</th>
+		<th scope="col">Options</th>
+		</tr>
+	</thead>
+	<tbody>
+	{loop="$users"}
+	<tr>
+		<th scope="row">{$value.iduser}</th>
+		<td>{$value.desname}</td>
+		<td>{$value.desemail}</td>
+		<td>{$value.despassword}</td>
+		<td><div class="btn-group-sm" role="group" aria-label="Button group with nested dropdown">
+		  <a class="btn btn-secondary" href="#" role="button">Edit</a>
+		  <a class="btn btn-danger" href="#" role="button">Delete</a>
+		</td>
+	</tr>
+	{/loop}
+	<!-- Loop end -->
+	</tbody>
+	</table>
+</div>
+<!-- Content end -->
+

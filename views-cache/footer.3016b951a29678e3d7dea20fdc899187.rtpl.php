@@ -1,6 +1,6 @@
 <?php if(!class_exists('Rain\Tpl')){exit;}?><!-- Sidebar -->
 		<div class="col-sm-4" style="text-align: center; font-size: 20px;">
-			<h2 style="font-family: 'Bree Serif', serif; font-size: 30px;">Últimas publicações</h2>
+			<h2 style="font-family: 'Bree Serif', serif; font-size: 25px;">Últimas publicações</h2>
 			<!-- Loop -->
 			<!-- Link 1 -->
 			<div class="row" style="padding-top: 1rem;">
@@ -28,11 +28,11 @@
 <!-- Main Container End -->
 
 <!-- Footer -->
-<div class="container-fluid">
-	<div class="row" style="background-color: #24715298; color: gray;">
-		<div class="col-sm-12" style="padding-top: 2rem;  font-family: 'Arial', serif; font-size: 15px; text-align: center">
-			<p>| Felipe Nascimento  | <i class="fas fa-envelope"></i> <a href="mailto:felipejn@gmail.com">felipejn@gmail.com</a> | 
-				<i class="fab fa-github"></i><a href="https://github.com/felipejn"> Github</a> | 
+<div class="container-fluid text-center">
+	<div class="row" style="background-color: #505050; color: gray;">
+		<div class="col-sm-12" style="padding: 2rem;  font-family: 'Arial', serif; font-size: 15px;">
+			<p>| Felipe Nascimento  | <i class="fas fa-envelope"></i> <a style="color: gray;" href="mailto:felipejn@gmail.com">felipejn@gmail.com</a> | 
+				<i class="fab fa-github"></i><a style="color: gray;" href="https://github.com/felipejn"> Github</a> | 
 				<form action="#" method="POST"><input type="submit" name="subscribeButton" value="Subscrever">
 				<input type="email" name="subscribe" placeholder="email..."></form></p> 
 		</div>
