@@ -18,7 +18,7 @@ class User extends Model
 
 		$sql = new Sql();
 
-		return $sql->select("SELECT * FROM tb_users");
+		return $sql->select("SELECT * FROM tb_users ORDER BY iduser");
 
 	}
 

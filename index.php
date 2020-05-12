@@ -8,6 +8,7 @@ use \Slim\Slim;
 use \Pronov\Page;
 use \Pronov\PageAdmin;
 use \Pronov\Model\User;
+use \Pronov\Model\Post;
 
 $app = new \Slim\Slim();
 
@@ -52,7 +53,9 @@ $app->get("/admin/posts", function() {
 
 	$page = new PageAdmin();
 
-	$page->setTpl("posts");
+	$page->setTpl("posts", [
+		'posts'=>Post::listAll()
+	]);
 
 });
 
