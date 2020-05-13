@@ -67,7 +67,7 @@ class User extends Model
 
 		return password_hash($password, PASSWORD_DEFAULT, [
 		"cost"=>12
-	]);
+		]);
 
 	}
 
@@ -83,7 +83,9 @@ class User extends Model
 		if (count($results) === 0)
 		{
 			User::setError("Login name or password incorrect.");
+			
 			header("Location: /admin/login");
+			
 			exit;
 		}
 
@@ -103,7 +105,9 @@ class User extends Model
 		} else {
 
 			User::setError("Login name or password incorrect.");
+
 			header("Location: /admin/login");
+			
 			exit;
 
 		}
@@ -174,6 +178,45 @@ class User extends Model
 	{
 
 		$_SESSION[User::SESSION] = NULL;
+
+	}
+
+	public static function setSuccess($msg)
+	{
+
+		$_SESSION[User::SUCCESS] = $msg;
+
+	}
+
+	public static function getSuccess()
+	{
+
+		$msg = (isset($_SESSION[User::SUCCESS]) && $_SESSION[User::SUCCESS]) ? $_SESSION[User::SUCCESS] : "" ;
+
+		User::clearSuccess();
+
+		return $msg;
+
+	}
+
+	public static function clearSuccess()
+	{
+
+		$_SESSION[User::SUCCESS] = NULL;
+
+	}
+
+	public function update()
+	{
+
+		$sql = new Sql();
+
+		$sql->query("UPDATE tb_users SET desname = :desname, desemail = :desemail, despassword = :despassword WHERE iduser = :iduser", [
+			'iduser'=>$this->getiduser(),
+			'desname'=>$this->getdesname(),
+			'desemail'=>$this->getdesemail(),
+			'despassword'=>$this->getdespassword()
+		]);
 
 	}
 

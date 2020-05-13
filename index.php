@@ -20,6 +20,7 @@ $app->get("/", function() {
 
 });
 
+// Admin Area
 $app->get("/admin", function() {
 
 	User::checkUser();
@@ -30,6 +31,7 @@ $app->get("/admin", function() {
 
 });
 
+// Login GET
 $app->get("/admin/login", function() {
 
 	$page = new PageAdmin([
@@ -43,6 +45,7 @@ $app->get("/admin/login", function() {
 
 });
 
+// Login POST
 $app->post("/admin/login", function() {
 
 	$user = new User();
@@ -55,6 +58,7 @@ $app->post("/admin/login", function() {
 
 });
 
+// Delete User GET
 $app->get("/admin/users/:iduser/delete", function($iduser) {
 
 	User::checkUser();
@@ -71,6 +75,7 @@ $app->get("/admin/users/:iduser/delete", function($iduser) {
 
 });
 
+// User List
 $app->get("/admin/users", function() {
 	
 	User::checkUser();
@@ -83,17 +88,21 @@ $app->get("/admin/users", function() {
 
 });
 
-$app->get("/admin/users/new", function() {
+// Create User GET
+$app->get("/admin/users/create", function() {
 
 	User::checkUser();
 
 	$page = new PageAdmin();
 
-	$page->setTpl("new-user");
+	$page->setTpl("create-user", [
+		'error'=>User::getError()
+	]);
 
 });
 
-$app->post("/admin/users/new", function() {
+// Create User POST
+$app->post("/admin/users/create", function() {
 
 	User::checkUser();
 
@@ -109,22 +118,25 @@ $app->post("/admin/users/new", function() {
 
 });
 
-$app->get("/admin/posts/new", function() {
+// Create Post GET
+$app->get("/admin/posts/create", function() {
 
 	User::checkUser();
 
 	$page = new PageAdmin();
 
-	$page->setTpl("new-post");
+	$page->setTpl("create-post");
 
 });
 
-$app->post("/admin/posts/new", function() {
+// Create Post POST
+$app->post("/admin/posts/create", function() {
 
 	User::checkUser();
 
 });
 
+// List Posts GET
 $app->get("/admin/posts", function() {
 
 	User::checkUser();
@@ -137,13 +149,87 @@ $app->get("/admin/posts", function() {
 
 });
 
-$app->get('/admin/logout', function() {
+// User Logout
+$app->get("/admin/logout", function() {
 
 	User::logout();
 
 	session_regenerate_id();
 
 	header("Location: /admin/login");
+
+	exit;
+
+});
+
+// User Update GET
+$app->get("/admin/users/:iduser/update", function($iduser) {
+
+	User::checkUser();
+
+	$user = new User();
+
+	$user->get((int)$iduser);
+	
+	$page = new PageAdmin();
+
+	$page->setTpl("update-user", [
+		'user'=>$user->getValues(),
+		'error'=>User::getError(),
+		'success'=>User::getSuccess()
+	]);
+
+});
+
+// User Update POST
+$app->post("/admin/users/:iduser/update", function($iduser) {
+
+	User::checkUser();
+
+	$user = new User();
+
+	$user->get((int)$iduser);
+
+	if (!isset($_POST['desname']) || $_POST['desname'] == "")
+	{
+		User::setError("Fill in the name field.");
+		header("Location: /admin/users/".$user->getiduser()."/update");
+		exit;	
+	}
+
+	if (!isset($_POST['desemail']) || $_POST['desemail'] == "")
+	{
+		User::setError("Fill in the login field.");
+		header("Location: /admin/users/".$user->getiduser()."/update");
+		exit;	
+	}
+
+	if ($_POST['despassword'] != $_POST['verifypassword'])
+	{
+		User::setError("Password and confirm password does not match.");
+		header("Location: /admin/users/".$user->getiduser()."/update");
+		exit;
+	}
+
+	if (!$_POST['despassword'] == "")
+	{
+	
+		$user->setdesname($_POST['desname']);
+		$user->setdesemail($_POST['desemail']);
+		$user->setdespassword(User::getPasswordHash($_POST['despassword']));
+	
+	} else {
+
+		$user->setdesname($_POST['desname']);
+		$user->setdesemail($_POST['desemail']);
+
+	}
+
+	$user->update();
+
+	User::setSuccess("Data updated successfully!");
+
+	header("Location: /admin/users/".$user->getiduser()."/update");
 
 	exit;
 

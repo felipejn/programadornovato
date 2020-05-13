@@ -1,19 +1,25 @@
+<?php if(!class_exists('Rain\Tpl')){exit;}?>
 
 <!-- Content -->
 <div class="container" style="min-height: 500px;">
 	<nav aria-label="breadcrumb">
   		<ol class="breadcrumb">
 		    <li class="breadcrumb-item"><a href="/admin">Home</a></li>
-		    <li class="breadcrumb-item active"><a href="/admin/posts">Users</a></li>
-		    <li class="breadcrumb-item active" aria-current="page">New User</li>
+		    <li class="breadcrumb-item active"><a href="/admin/users">Users</a></li>
+		    <li class="breadcrumb-item active" aria-current="page">Create User</li>
 		</ol>
 	</nav>
+	<!-- Error Message -->
+	<?php if( $error != '' ){ ?>
+
 	<div class="alert alert-danger alert-dismissible" role="alert">
 		  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span>
 		  </button>
-		  <center>Mensagem de Erro</center>
+		  <center>{error}</center>
 	</div>
-	<form action="/admin/users/new" method="POST">
+	<?php } ?>
+
+	<form action="/admin/users/create" method="POST">
 		<div class="form-row py-2">
 			<div class="col">
 				<label for="desname">Name</label>
@@ -30,8 +36,8 @@
 				<input type="password" class="form-control" id="despassword" name="despassword">
 			</div>
 			<div class="col-sm-6">
-				<label for="despassword">Verify Password</label>
-				<input type="password" class="form-control" id="verifypassword" name="verifypassword">
+				<label for="despassword">Confirm Password</label>
+				<input type="password" class="form-control" id="confirmpassword" name="confirmpassword">
 			</div>
 		</div>
 		<div class="form-group">

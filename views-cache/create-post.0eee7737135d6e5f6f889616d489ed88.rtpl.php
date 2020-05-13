@@ -1,3 +1,4 @@
+<?php if(!class_exists('Rain\Tpl')){exit;}?>
 
 <!-- Content -->
 <div class="container" style="min-height: 500px;">
@@ -5,11 +6,11 @@
   		<ol class="breadcrumb">
 		    <li class="breadcrumb-item"><a href="/admin">Home</a></li>
 		    <li class="breadcrumb-item active"><a href="/admin/posts">Posts</a></li>
-		    <li class="breadcrumb-item active" aria-current="page">New Post</li>
+		    <li class="breadcrumb-item active" aria-current="page">create Post</li>
 		</ol>
 	</nav>
 	
-	<form action="/admin/posts/new" method="POST">
+	<form action="/admin/posts/create" method="POST">
 		<div class="form-row">
 			<label for="destittle">Tittle</label>
 			<input type="text" class="form-control" id="destittle" name="destittle">
