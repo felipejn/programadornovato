@@ -28,13 +28,27 @@ class User extends Model
 
 		$sql = new Sql();
 
-		$results = $sql->select("CALL sp_user_new(:desname, :desemail, :despassword)", [
-			':desname'=>$this->getdesname(),
-			':desemail'=>$this->getdesemail(),
-			':despassword'=>User::getpasswordhash($this->getdespassword())
+		$check = $sql->select("SELECT * FROM tb_users WHERE desemail = :desemail", [
+			':desemail'=>$this->getdesemail()
 		]);
 
-		$this->setData($results[0]);
+		if (count($check) > 0)
+		{
+			User::setError("This login already exists.");
+			header("Location: /admin/users/create");
+			exit;
+		
+		} else {
+
+			$results = $sql->select("CALL sp_user_new(:desname, :desemail, :despassword)", [
+				':desname'=>$this->getdesname(),
+				':desemail'=>$this->getdesemail(),
+				':despassword'=>User::getpasswordhash($this->getdespassword())
+			]);
+
+			$this->setData($results[0]);
+		
+		}
 
 	}
 

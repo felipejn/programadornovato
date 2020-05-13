@@ -106,6 +106,34 @@ $app->post("/admin/users/create", function() {
 
 	User::checkUser();
 
+	if (!isset($_POST['desname']) || !$_POST['desname'])
+	{
+		User::setError("Fill in the name field.");
+		header("Location: /admin/users/create");
+		exit;
+	}
+
+	if (!isset($_POST['desemail']) || !$_POST['desemail'])
+	{
+		User::setError("Fill in the login field.");
+		header("Location: /admin/users/create");
+		exit;
+	}
+
+	if (!isset($_POST['despassword']) || !$_POST['despassword'])
+	{
+		User::setError("Fill in the password field.");
+		header("Location: /admin/users/create");
+		exit;
+	}
+
+	if ($_POST['despassword'] != $_POST['confirmpassword'])
+	{
+		User::setError("Password and confirm password does not match.");
+		header("Location: /admin/users/create");
+		exit;
+	}
+
 	$user = new User();
 
 	$user->setData($_POST);

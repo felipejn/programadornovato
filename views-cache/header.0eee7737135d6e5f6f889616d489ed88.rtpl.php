@@ -12,18 +12,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital@1&display=swap" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="/res/css/styles.css">
-<style>
-	.navlink {
-		color: #505050;
-		font-family: 'roboto slab', serif;
-		font-size: 20px;
-	}
-	.navlink:hover {
-		color: #505050;
-		text-shadow: 1px 1px #505050;
-	}
-</style>
-<title>Admin - programadorNOVATO</title>
+<title>Admin - programador NOVATO</title>
 </head>
 <body>
 <!-- Header -->
