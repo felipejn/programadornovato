@@ -1,7 +1,7 @@
 <?php if(!class_exists('Rain\Tpl')){exit;}?>
 
 <!-- Content -->
-<div class="container">
+<div class="container" style="min-height: 500px;">
 	<nav aria-label="breadcrumb">
 	  	<ol class="breadcrumb">
 	    	<li class="breadcrumb-item active" aria-current="page">Home</li>
@@ -9,6 +9,7 @@
 	</nav>
 	<div class="jumbotron text-center">
 		<h1>Home Admin Area</h1>
+
 	</div>
 </div>
 <!-- Content end -->

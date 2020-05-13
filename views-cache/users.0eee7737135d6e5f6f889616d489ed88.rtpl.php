@@ -1,7 +1,7 @@
 <?php if(!class_exists('Rain\Tpl')){exit;}?>
 
 <!-- Content -->
-<div class="container">
+<div class="container" style="min-height: 500px;">
 <nav aria-label="breadcrumb">
 	<ol class="breadcrumb">
 		<li class="breadcrumb-item"><a href="#">Home</a></li>
@@ -15,8 +15,7 @@
 		<th scope="col">Id</th>
 		<th scope="col">Nome</th>
 		<th scope="col">Login</th>
-		<th scope="col">Password</th>
-		<th scope="col">Options</th>
+		<th style="min-width: 100px;" scope="col">Options</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -26,10 +25,9 @@
 		<th scope="row"><?php echo htmlspecialchars( $value1["iduser"], ENT_COMPAT, 'UTF-8', FALSE ); ?></th>
 		<td><?php echo htmlspecialchars( $value1["desname"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
 		<td><?php echo htmlspecialchars( $value1["desemail"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
-		<td><?php echo htmlspecialchars( $value1["despassword"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
 		<td><div class="btn-group-sm" role="group" aria-label="Button group with nested dropdown">
 		  <a class="btn btn-secondary" href="#" role="button">Edit</a>
-		  <a class="btn btn-danger" href="#" role="button">Delete</a>
+		  <a class="btn btn-danger" onclick="return confirm('Are you sure you want to delete?')"href="/admin/users/<?php echo htmlspecialchars( $value1["iduser"], ENT_COMPAT, 'UTF-8', FALSE ); ?>/delete" role="button">Delete</a>
 		</td>
 	</tr>
 	<?php } ?>

@@ -49,11 +49,31 @@
       <li class="nav-item">
         <a class="nav-link px-3 active" href="/admin">HOME</a>
       </li>
-      <li class="nav-item px-3">
-        <a class="nav-link" href="/admin/users">USERS</a>
+      <li class="nav-item px-3 dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          USERS
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="/admin/users">LIST</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="/admin/users/new">NEW USER</a>
+        </div>
       </li>
-      <li class="nav-item px-3">
-        <a class="nav-link" href="/admin/posts">POSTS</a>
+      <li class="nav-item px-3 dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          POSTS
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="/admin/posts">LIST</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="/admin/posts/new">NEW POST</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link px-3" target="_blank" href="/">BLOG</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link px-3" href="/admin/logout">LOGOUT</a>
       </li>
     </ul>
   </div>

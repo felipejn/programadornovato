@@ -1,14 +1,14 @@
 <?php if(!class_exists('Rain\Tpl')){exit;}?>
 
 <!-- Content -->
-<div class="container">
+<div class="container" style="min-height: 500px;">
 	<nav aria-label="breadcrumb">
   		<ol class="breadcrumb">
 		    <li class="breadcrumb-item"><a href="/admin">Home</a></li>
 		    <li class="breadcrumb-item active" aria-current="page">Posts</li>
 		</ol>
 	</nav>
-	<table class="table table-striped table-responsive{sm}">
+	<table class="table table-striped table-bordered table-responsive{sm}">
 	<thead>
 		<tr>
 		<th scope="col">Id</th>
