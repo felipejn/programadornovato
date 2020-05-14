@@ -9,6 +9,7 @@ use \Pronov\Page;
 use \Pronov\PageAdmin;
 use \Pronov\Model\User;
 use \Pronov\Model\Post;
+use \Pronov\Model\Tag;
 
 $app = new \Slim\Slim();
 
@@ -31,7 +32,7 @@ $app->get("/admin", function() {
 
 });
 
-// Login GET
+// Login
 $app->get("/admin/login", function() {
 
 	$page = new PageAdmin([
@@ -45,7 +46,7 @@ $app->get("/admin/login", function() {
 
 });
 
-// Login POST
+// Login
 $app->post("/admin/login", function() {
 
 	$user = new User();
@@ -58,7 +59,7 @@ $app->post("/admin/login", function() {
 
 });
 
-// Delete User GET
+// Delete User
 $app->get("/admin/users/:iduser/delete", function($iduser) {
 
 	User::checkUser();
@@ -83,12 +84,13 @@ $app->get("/admin/users", function() {
 	$page = new PageAdmin();
 
 	$page->setTpl("users", [
-		'users'=>User::listAll()
+		'users'=>User::listAll(),
+		'success'=>User::getSuccess()
 	]);
 
 });
 
-// Create User GET
+// Create User
 $app->get("/admin/users/create", function() {
 
 	User::checkUser();
@@ -101,7 +103,7 @@ $app->get("/admin/users/create", function() {
 
 });
 
-// Create User POST
+// Create User
 $app->post("/admin/users/create", function() {
 
 	User::checkUser();
@@ -146,7 +148,7 @@ $app->post("/admin/users/create", function() {
 
 });
 
-// Create Post GET
+// Create Post
 $app->get("/admin/posts/create", function() {
 
 	User::checkUser();
@@ -157,14 +159,14 @@ $app->get("/admin/posts/create", function() {
 
 });
 
-// Create Post POST
+// Create Post
 $app->post("/admin/posts/create", function() {
 
 	User::checkUser();
 
 });
 
-// List Posts GET
+// List Posts
 $app->get("/admin/posts", function() {
 
 	User::checkUser();
@@ -172,7 +174,8 @@ $app->get("/admin/posts", function() {
 	$page = new PageAdmin();
 
 	$page->setTpl("posts", [
-		'posts'=>Post::listAll()
+		'posts'=>Post::listAll(),
+		'success'=>Post::getSuccess()
 	]);
 
 });
@@ -190,7 +193,7 @@ $app->get("/admin/logout", function() {
 
 });
 
-// User Update GET
+// User Update
 $app->get("/admin/users/:iduser/update", function($iduser) {
 
 	User::checkUser();
@@ -204,12 +207,11 @@ $app->get("/admin/users/:iduser/update", function($iduser) {
 	$page->setTpl("update-user", [
 		'user'=>$user->getValues(),
 		'error'=>User::getError(),
-		'success'=>User::getSuccess()
 	]);
 
 });
 
-// User Update POST
+// User Update
 $app->post("/admin/users/:iduser/update", function($iduser) {
 
 	User::checkUser();
@@ -221,21 +223,21 @@ $app->post("/admin/users/:iduser/update", function($iduser) {
 	if (!isset($_POST['desname']) || $_POST['desname'] == "")
 	{
 		User::setError("Fill in the name field.");
-		header("Location: /admin/users/".$user->getiduser()."/update");
+		header("Location: /admin/users/".$iduser."/update");
 		exit;	
 	}
 
 	if (!isset($_POST['desemail']) || $_POST['desemail'] == "")
 	{
 		User::setError("Fill in the login field.");
-		header("Location: /admin/users/".$user->getiduser()."/update");
+		header("Location: /admin/users/".$iduser."/update");
 		exit;	
 	}
 
 	if ($_POST['despassword'] != $_POST['verifypassword'])
 	{
 		User::setError("Password and confirm password does not match.");
-		header("Location: /admin/users/".$user->getiduser()."/update");
+		header("Location: /admin/users/".$iduser."/update");
 		exit;
 	}
 
@@ -257,7 +259,121 @@ $app->post("/admin/users/:iduser/update", function($iduser) {
 
 	User::setSuccess("Data updated successfully!");
 
-	header("Location: /admin/users/".$user->getiduser()."/update");
+	header("Location: /admin/users");
+
+	exit;
+
+});
+
+// Tags List
+$app->get("/admin/tags", function() {
+
+	User::checkUser();
+
+	$page = new PageAdmin();
+
+	$page->setTpl("tags", [
+		'tags'=>Tag::listAll(),
+		'success'=>Tag::getSuccess()
+	]);
+
+});
+
+// Tag Create
+$app->get("/admin/tags/create", function() {
+
+	User::checkUser();
+
+	$page = new PageAdmin();
+
+	$page->setTpl("create-tag", [
+		'error'=>Tag::getError()
+	]);
+
+});
+
+// Tag Create
+$app->post("/admin/tags/create", function() {
+
+	User::checkUser();
+
+	if (!isset($_POST['destag']) || !$_POST['destag'])
+	{
+		Tag::setError("Fill in the name field");
+		header("Location: /admin/tags/create");
+		exit;
+	}
+
+	$tag = new Tag();
+
+	$tag->setData($_POST);
+
+	$tag->createTag();
+
+	header("Location: /admin/tags");
+
+	exit;
+
+});
+
+// Tag Delete
+$app->get("/admin/tags/:idtag/delete", function($idtag) {
+
+	User::checkUser();
+
+	$tag = new Tag();
+
+	$tag->get((int)$idtag);
+
+	$tag->delete();
+
+	header("Location: /admin/tags");
+
+	exit;
+
+});
+
+// Tag Rename
+$app->get("/admin/tags/:idtag/rename", function($idtag) {
+
+	User::checkUser();
+
+	$tag = new Tag();
+
+	$tag->get((int)$idtag);
+
+	$page = new PageAdmin();
+
+	$page->setTpl("rename-tag", [
+		'tag'=>$tag->getValues(),
+		'error'=>Tag::getError()
+	]);
+
+});
+
+// Tag Rename
+$app->post("/admin/tags/:idtag/rename", function($idtag) {
+
+	User::checkUser();
+
+	$tag = new Tag();
+
+	$tag->get((int)$idtag);
+
+	if (!isset($_POST['destag']) || !$_POST['destag'])
+	{
+		Tag::setErro("Fill in the tag name field.");
+		header("Location: /admin/tags/".$idtag."/rename");
+		exit;
+	}
+
+	$tag->setData($_POST);
+
+	$tag->update();
+
+	Tag::setSuccess("Tag renamed successfully.");
+	
+	header("Location: /admin/tags");
 
 	exit;
 

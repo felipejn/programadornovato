@@ -128,7 +128,7 @@ class User extends Model
 
 	}
 
-	public static function verifyLogin()
+	public static function verifyLogin():bool
 	{
 
 		if (

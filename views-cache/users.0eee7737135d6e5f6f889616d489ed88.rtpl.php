@@ -8,12 +8,21 @@
 		<li class="breadcrumb-item active" aria-current="page">Users</li>
 	</ol>
 </nav>
+	<!-- Success Message -->
+	<?php if( $success != '' ){ ?>
+
+	<div class="alert alert-success alert-dismissible" role="alert">
+		  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span>
+		  </button>
+		  <center><?php echo htmlspecialchars( $success, ENT_COMPAT, 'UTF-8', FALSE ); ?></center>
+	</div>
+	<?php } ?>
 
 	<table class="table table-striped table-bordered">
 	<thead>
 		<tr>
 		<th scope="col">Id</th>
-		<th scope="col">Nome</th>
+		<th scope="col">Name</th>
 		<th scope="col">Login</th>
 		<th style="min-width: 100px;" scope="col">Options</th>
 		</tr>

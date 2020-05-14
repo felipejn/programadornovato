@@ -4,7 +4,7 @@
 <nav aria-label="breadcrumb">
 	<ol class="breadcrumb">
 		<li class="breadcrumb-item"><a href="/admin">Home</a></li>
-		<li class="breadcrumb-item active" aria-current="page">Users</li>
+		<li class="breadcrumb-item active" aria-current="page">Tags</li>
 	</ol>
 </nav>
 	<!-- Success Message -->
@@ -19,20 +19,18 @@
 	<thead>
 		<tr>
 		<th scope="col">Id</th>
-		<th scope="col">Name</th>
-		<th scope="col">Login</th>
-		<th style="min-width: 100px;" scope="col">Options</th>
+		<th scope="col">Tag Name</th>
+		<th style="max-width: 250px; min-width: 100px;" scope="col">Options</th>
 		</tr>
 	</thead>
 	<tbody>
-	{loop="$users"}
+	{loop="$tags"}
 	<tr>
-		<th scope="row">{$value.iduser}</th>
-		<td>{$value.desname}</td>
-		<td>{$value.desemail}</td>
+		<th scope="row">{$value.idtag}</th>
+		<td>{$value.destag}</td>
 		<td><div class="btn-group-sm" role="group" aria-label="Button group with nested dropdown">
-		  <a class="btn btn-secondary" href="/admin/users/{$value.iduser}/update" role="button">Update</a>
-		  <a class="btn btn-danger" onclick="return confirm('Are you sure you want to delete?')"href="/admin/users/{$value.iduser}/delete" role="button">Delete</a>
+		  <a class="btn btn-secondary" href="/admin/tags/{$value.idtag}/rename" role="button">Rename</a>
+		  <a class="btn btn-danger" onclick="return confirm('Are you sure you want to delete?')"href="/admin/tags/{$value.idtag}/delete" role="button">Delete</a>
 		</td>
 	</tr>
 	{/loop}

@@ -20,15 +20,6 @@
 	<?php } ?>
 
 	<!-- Success Message -->
-	<?php if( $success != '' ){ ?>
-
-	<div class="alert alert-success alert-dismissible" role="alert">
-		  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span>
-		  </button>
-		  <center><?php echo htmlspecialchars( $success, ENT_COMPAT, 'UTF-8', FALSE ); ?></center>
-	</div>
-	<?php } ?>
-
 	<form action="/admin/users/<?php echo htmlspecialchars( $user["iduser"], ENT_COMPAT, 'UTF-8', FALSE ); ?>/update" method="POST">
 		<div class="form-row py-2">
 			<div class="col">

@@ -8,6 +8,7 @@
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 <!-- Styles and Fonts -->
+<script src="https://kit.fontawesome.com/f1151761e4.js" crossorigin="anonymous"></script>
 <link href="https://fonts.googleapis.com/css2?family=Bree+Serif&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital@1&display=swap" rel="stylesheet">
@@ -56,6 +57,16 @@
           <a class="dropdown-item" href="/admin/posts">LIST</a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="/admin/posts/create">NEW POST</a>
+        </div>
+      </li>
+      <li class="nav-item px-3 dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          TAGS
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="/admin/tags">LIST</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="/admin/tags/create">NEW TAG</a>
         </div>
       </li>
       <li class="nav-item">
