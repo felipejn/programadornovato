@@ -20,7 +20,7 @@
 	<?php } ?>
 
 	<form action="/admin/tags/<?php echo htmlspecialchars( $tag["idtag"], ENT_COMPAT, 'UTF-8', FALSE ); ?>/rename" method="POST">
-		<div class="form-row py-2">
+		<div class="form-row py-3">
 			<div class="col">
 				<label for="destag">Tag Name</label>
 				<input type="text" value="<?php echo htmlspecialchars( $tag["destag"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" class="form-control" id="destag" name="destag">

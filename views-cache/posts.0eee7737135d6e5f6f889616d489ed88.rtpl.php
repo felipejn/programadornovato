@@ -26,7 +26,7 @@
 		<th scope="col">Tittle</th>
 		<th scope="col">Date</th>
 		<th scope="col">Published</th>
-		<th style="min-width: 210px;"scope="col">Options</th>
+		<th style="min-width: 220px;"scope="col">Options</th>
 		</tr>
 	</thead>
 	<tbody>

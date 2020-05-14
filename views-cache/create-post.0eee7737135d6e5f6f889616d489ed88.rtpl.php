@@ -9,7 +9,15 @@
 		    <li class="breadcrumb-item active" aria-current="page">New Post</li>
 		</ol>
 	</nav>
-	
+	<?php if( $error != '' ){ ?>
+
+	<div class="alert alert-danger alert-dismissible" role="alert">
+		  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span>
+		  </button>
+		  <center><?php echo htmlspecialchars( $error, ENT_COMPAT, 'UTF-8', FALSE ); ?></center>
+	</div>
+	<?php } ?>
+
 	<form action="/admin/posts/create" method="POST">
 		<div class="form-group">
 			<label for="destittle">Tittle</label>
@@ -18,37 +26,42 @@
 		
 		<div class="form-row py-2">
 			<div class="col">
-				<label for="desurl">Url</label>
+				<label for="desurl">Post Url</label>
 				<input type="text" class="form-control" id="desurl" name="desurl">
 			</div>
 			<div class="col">
-				<label for="deslink">Link</label>
+				<label for="deslink">Target Link</label>
 				<input type="text" class="form-control" id="deslink" name="deslink">
 			</div>	
 		</div>
 		<div class="form-group py-2">
 			<label for="tags">Tags</label>
 			<div class="form-check" id="tags">
-				<input class="form-check-input" type="checkbox" name="idtag1" id="idtag1">
-				<label class="form-check-label pr-5" for="idtag1">Tag 1</label>
-				<input class="form-check-input" type="checkbox" name="idtag2" id="idtag2">
-				<label class="form-check-label pr-5" for="idtag2">Tag 2</label>
-				<input class="form-check-input" type="checkbox" name="idtag3" id="idtag3">
-				<label class="form-check-label pr-5" for="idtag3">Tag 3</label>
+				<?php $counter1=-1;  if( isset($tags) && ( is_array($tags) || $tags instanceof Traversable ) && sizeof($tags) ) foreach( $tags as $key1 => $value1 ){ $counter1++; ?>
+
+				<input class="form-check-input" type="checkbox" name="idtag<?php echo htmlspecialchars( $value1["idtag"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" id="<?php echo htmlspecialchars( $value1["destag"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
+				<label class="form-check-label pr-5" for="<?php echo htmlspecialchars( $value1["destag"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><?php echo htmlspecialchars( $value1["destag"], ENT_COMPAT, 'UTF-8', FALSE ); ?></label>
+				<?php } ?>
+
+			</div>
+		</div>
+		<div class="form-row py-2">
+			<div class="col-sm-4">
+				<img src="/res/admin/img/blank.png" class="img-thumbnail">
+			</div>
+			<div class="col-sm-8 form-group py-2">
+				<div class="form-group">
+					<label for="desimage">Upload a image</label>
+					<input type="file" class="form-control-file" id="desimage" name="desimage">
+				</div>
 			</div>
 		</div>
 		<div class="form-group py-2">
-			<div class="form-group">
-				<label for="desimage">Upload a image</label>
-				<input type="file" class="form-control-file" id="desimage" name="desimage">
-			</div>
-		</div>
-		<div class="form-group">
 		    <label for="destext">Text</label>
 		    <textarea class="form-control" id="destext" name="destext" rows="10"></textarea>
 		</div>
 		<div class="form-group form-check">
-		    <input type="checkbox" class="form-check-input" id="despublish" name="despublish">
+		    <input type="checkbox" class="form-check-input" id="despub" name="despub">
 		    <label class="form-check-label" for="despub">Publish?</label>
 	    </div>
 	    <div class="form-group">

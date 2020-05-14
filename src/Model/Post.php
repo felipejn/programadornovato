@@ -19,8 +19,60 @@ class Post extends Model
 		return $sql->select("SELECT * FROM tb_posts a 
 			INNER JOIN tb_users b
 			USING(iduser)
-			ORDER BY idpost
+			ORDER BY idpost DESC
 		");
+
+	}
+
+	public function createPost()
+	{
+
+		$sql = new Sql();
+
+		$check = $sql->select("SELECT * FROM tb_tags WHERE desurl = :desurl", [
+			':desurl'=>$this->getdesurl()
+		]);
+
+		if (count($check) > 0)
+		{
+			Tag::setError("This url has already been used.");
+			header("Location: /admin/posts/create");
+			exit;
+		
+		} else {
+
+			$results = $sql->select("CALL sp_post_new(:iduser, :desurl, :deslink, :desimage, :destittle, :destext, :despub)", [
+				':iduser'=>User::getIdFromSession(),
+				':desurl'=>$this->getdesurl(),
+				':deslink'=>$this->getdeslink(),
+				':desimage'=>$this->getdesimage(),
+				':destittle'=>$this->getdestittle(),
+				':destext'=>$this->getdestext(),
+				':despub'=>$this->getdespub()
+			]);
+
+			$this->setData($results[0]);
+
+		}
+
+	}
+
+	public function setNewTags($data)
+	{
+
+		foreach ($data as $key => $value) {
+			if (substr($key, 0, 5) == "idtag")
+			{
+				$idtag = substr($key, 5);
+
+				$sql = new Sql();
+
+				$sql->query("INSERT INTO tb_poststags (idpost, idtag) VALUES(:idpost, :idtag)", [
+					':idpost'=>$this->getidpost(),
+					':idtag'=>$idtag
+				]);
+			}	
+		}
 
 	}
 

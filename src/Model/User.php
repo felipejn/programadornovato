@@ -52,6 +52,20 @@ class User extends Model
 
 	}
 
+	public function update()
+	{
+
+		$sql = new Sql();
+
+		$sql->query("UPDATE tb_users SET desname = :desname, desemail = :desemail, despassword = :despassword WHERE iduser = :iduser", [
+			'iduser'=>$this->getiduser(),
+			'desname'=>$this->getdesname(),
+			'desemail'=>$this->getdesemail(),
+			'despassword'=>$this->getdespassword()
+		]);
+
+	}
+
 	public function get($iduser)
 	{
 
@@ -62,6 +76,13 @@ class User extends Model
 		]);
 
 		$this->setData($results[0]);
+
+	}
+
+	public static function getIdFromSession()
+	{
+
+		return $_SESSION[User::SESSION]['iduser'];		
 
 	}
 
@@ -217,20 +238,6 @@ class User extends Model
 	{
 
 		$_SESSION[User::SUCCESS] = NULL;
-
-	}
-
-	public function update()
-	{
-
-		$sql = new Sql();
-
-		$sql->query("UPDATE tb_users SET desname = :desname, desemail = :desemail, despassword = :despassword WHERE iduser = :iduser", [
-			'iduser'=>$this->getiduser(),
-			'desname'=>$this->getdesname(),
-			'desemail'=>$this->getdesemail(),
-			'despassword'=>$this->getdespassword()
-		]);
 
 	}
 
