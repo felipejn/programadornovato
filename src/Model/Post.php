@@ -24,6 +24,19 @@ class Post extends Model
 
 	}
 
+	public function get($idpost)
+	{
+
+		$sql = new Sql();
+
+		$results = $sql->select("SELECT * FROM tb_posts WHERE idpost = :idpost", [
+			':idpost'=>$idpost
+		]);
+
+		$this->setData($results[0]);
+
+	}
+
 	public function createPost()
 	{
 
@@ -123,6 +136,30 @@ class Post extends Model
 	{
 
 		$_SESSION[Post::SUCCESS] = NULL;
+
+	}
+
+	public function delete()
+	{
+
+		$sql = new Sql();
+
+		$sql->query("CALL sp_post_delete(:idpost)", [
+			':idpost'=>$this->getidpost()
+		]);
+
+	}
+
+	public function changeStatus()
+	{
+		$newstatus = ($this->getdespub() !== NULL && $this->getdespub() == 0) ? 1 : 0;
+		
+		$sql = new Sql();
+		
+		$sql->select("UPDATE tb_posts SET despub = :newstatus WHERE idpost = :idpost", [
+			'newstatus'=>$newstatus,
+			':idpost'=>$this->getidpost()
+		]);
 
 	}
 
