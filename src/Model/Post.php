@@ -42,13 +42,13 @@ class Post extends Model
 
 		$sql = new Sql();
 
-		$check = $sql->select("SELECT * FROM tb_tags WHERE desurl = :desurl", [
+		$check = $sql->select("SELECT * FROM tb_posts WHERE desurl = :desurl", [
 			':desurl'=>$this->getdesurl()
 		]);
 
 		if (count($check) > 0)
 		{
-			Tag::setError("This url has already been used.");
+			Post::setError("This url has already been used.");
 			header("Location: /admin/posts/create");
 			exit;
 		
@@ -70,7 +70,7 @@ class Post extends Model
 
 	}
 
-	public function setNewTags($data)
+	public function setTags($data)
 	{
 
 		foreach ($data as $key => $value) {
@@ -86,6 +86,63 @@ class Post extends Model
 				]);
 			}	
 		}
+
+	}
+
+	public function getUsedTags()
+	{
+
+		$sql = new Sql();
+
+		$usedtags = $sql->select("SELECT * FROM tb_poststags WHERE idpost = :idpost", [
+			':idpost'=>$this->getidpost()
+		]);
+
+		$alltags = Tag::listAll();
+
+		for ($i=0; $i <	count($alltags); $i++) { 
+			for ($j=0; $j < count($usedtags); $j++) { 
+				if ($alltags[$i]['idtag'] === $usedtags[$j]['idtag'])
+				{
+					$alltags[$i]['desstatus'] = 1;
+				} 
+			} 
+		}
+
+		return $alltags;
+
+	}
+
+	public function updatePost()
+	{
+
+		$sql = new Sql();
+
+		$results = $sql->select("CALL sp_post_update(:idpost, :iduser, :desurl, :deslink, :desimage, :destittle, :destext, :despub)", [
+			':idpost'=>$this->getidpost(),
+			':iduser'=>$this->getiduser(),
+			':desurl'=>$this->getdesurl(),
+			':deslink'=>$this->getdeslink(),
+			':desimage'=>$this->getdesimage(),
+			':destittle'=>$this->getdestittle(),
+			':destext'=>$this->getdestext(),
+			':despub'=>$this->getdespub()
+		]);
+
+		$this->setData($results[0]);
+
+	}
+
+	public function updateTags($data)
+	{
+
+		$sql = new Sql();
+
+		$sql->query("DELETE FROM tb_poststags WHERE idpost = :idpost", [
+			':idpost'=>$this->getidpost()
+		]);
+
+		$this->setTags($data);
 
 	}
 

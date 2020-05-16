@@ -36,7 +36,7 @@
 		<td><?php echo htmlspecialchars( $value1["desemail"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
 		<td><div class="btn-group-sm" role="group" aria-label="Button group with nested dropdown">
 		  <a class="btn btn-secondary" href="/admin/users/<?php echo htmlspecialchars( $value1["iduser"], ENT_COMPAT, 'UTF-8', FALSE ); ?>/update" role="button">Update</a>
-		  <a class="btn btn-danger" onclick="return confirm('Are you sure you want to delete?')"href="/admin/users/<?php echo htmlspecialchars( $value1["iduser"], ENT_COMPAT, 'UTF-8', FALSE ); ?>/delete" role="button">Delete</a>
+		  <a class="btn btn-danger" onclick="return confirm('Are you sure you want to delete?')" href="/admin/users/<?php echo htmlspecialchars( $value1["iduser"], ENT_COMPAT, 'UTF-8', FALSE ); ?>/delete" role="button">Delete</a>
 		</td>
 	</tr>
 	<?php } ?>

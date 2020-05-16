@@ -54,7 +54,7 @@ $app->post("/admin/posts/create", function() {
 
 	$post->createPost();
 
-	$post->setNewTags($_POST);
+	$post->setTags($_POST);
 
 	header("Location: /admin/posts");
 
@@ -104,6 +104,73 @@ $app->get("/admin/posts/:idpost/changestatus", function($idpost) {
 
 	$post->changeStatus();
 
+	header("Location: /admin/posts");
+
+	exit;
+
+});
+
+// Update Posts
+$app->get("/admin/posts/:idpost/update", function($idpost) {
+
+	User::checkUser();
+
+	$post = new Post();
+
+	$post->get((int)$idpost);
+
+	$tags = $post->getUsedTags();
+
+	$page = new PageAdmin();
+
+	$page->setTpl("update-post", [
+		'post'=>$post->getValues(),
+		'tags'=>$tags,
+		'error'=>Post::getError()
+	]);
+
+});
+
+// Update Posts
+$app->post("/admin/posts/:idpost/update", function($idpost) {
+
+	User::checkUser();
+
+	if (!isset($_POST['destittle']) || !$_POST['destittle'])
+	{
+		Post::setError("Fill in the tittle field.");
+		header("Location: /admin/posts/create");
+		exit;
+	}
+
+	if (!isset($_POST['desurl']) || !$_POST['desurl'])
+	{
+		Post::setError("Fill in the url field.");
+		header("Location: /admin/posts/create");
+		exit;
+	}
+
+	if (!isset($_POST['destext']) || !$_POST['destext'])
+	{
+		Post::setError("Fill in the text field.");
+		header("Location: /admin/posts/create");
+		exit;
+	}
+
+	$_POST['despub'] = (isset($_POST['despub']) && $_POST['despub'] == "on") ? 1 : 0;
+
+	$post = new Post();
+
+	$post->get((int)$idpost);
+
+	$post->setdata($_POST);
+
+	$post->updatePost();
+
+	$post->updateTags($_POST);
+
+	Post::setSuccess("Post updated successfully!");
+	
 	header("Location: /admin/posts");
 
 	exit;

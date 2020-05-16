@@ -36,7 +36,7 @@
 		<td>{if="$value.despub == 0"} No {else} Yes {/if}</td>
 		<td><div class="btn-group-sm" role="group" aria-label="Button group with nested dropdown">
 		  <a class="btn btn-primary" href="/admin/posts/{$value.idpost}/changestatus" role="button">{if="$value.despub == 0"} Publish {else} Unpublish {/if}</a>
-		  <a class="btn btn-secondary" href="#" role="button">Edit</a>
+		  <a class="btn btn-secondary" href="/admin/posts/{$value.idpost}/update" role="button">Edit</a>
 		  <a class="btn btn-danger" onclick="return confirm('Are you sure you want to delete?')" href="/admin/posts/{$value.idpost}/delete" role="button">Delete</a>
 		</td>
 	</tr>
