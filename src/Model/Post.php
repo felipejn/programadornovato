@@ -70,10 +70,10 @@ class Post extends Model
 
 	}
 
-	public function setTags($data)
+	public function setTags()
 	{
 
-		foreach ($data as $key => $value) {
+		foreach ($this->getvalues() as $key => $value) {
 			if (substr($key, 0, 5) == "idtag")
 			{
 				$idtag = substr($key, 5);
@@ -133,7 +133,7 @@ class Post extends Model
 
 	}
 
-	public function updateTags($data)
+	public function updateTags()
 	{
 
 		$sql = new Sql();
@@ -142,7 +142,7 @@ class Post extends Model
 			':idpost'=>$this->getidpost()
 		]);
 
-		$this->setTags($data);
+		$this->setTags();
 
 	}
 

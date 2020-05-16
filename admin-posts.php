@@ -54,7 +54,7 @@ $app->post("/admin/posts/create", function() {
 
 	$post->createPost();
 
-	$post->setTags($_POST);
+	$post->setTags();
 
 	header("Location: /admin/posts");
 
@@ -119,13 +119,11 @@ $app->get("/admin/posts/:idpost/update", function($idpost) {
 
 	$post->get((int)$idpost);
 
-	$tags = $post->getUsedTags();
-
 	$page = new PageAdmin();
 
 	$page->setTpl("update-post", [
 		'post'=>$post->getValues(),
-		'tags'=>$tags,
+		'tags'=>$post->getUsedTags(),
 		'error'=>Post::getError()
 	]);
 
@@ -167,7 +165,7 @@ $app->post("/admin/posts/:idpost/update", function($idpost) {
 
 	$post->updatePost();
 
-	$post->updateTags($_POST);
+	$post->updateTags();
 
 	Post::setSuccess("Post updated successfully!");
 	
