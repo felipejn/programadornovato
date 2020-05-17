@@ -56,6 +56,15 @@ $app->post("/admin/posts/create", function() {
 
 	$post->setTags();
 
+	if ($_FILES['desimage']['error'] === 0) 
+	{
+		$post->setPhoto($_FILES['desimage']);
+	} else {
+		Post::setError("File upload error!");
+		header("Location: /admin/posts/create");
+		exit;
+	}
+	
 	header("Location: /admin/posts");
 
 	exit;	
@@ -123,7 +132,7 @@ $app->get("/admin/posts/:idpost/update", function($idpost) {
 
 	$page->setTpl("update-post", [
 		'post'=>$post->getValues(),
-		'tags'=>$post->getUsedTags(),
+		'tags'=>$post->getTags(),
 		'error'=>Post::getError()
 	]);
 
@@ -167,6 +176,21 @@ $app->post("/admin/posts/:idpost/update", function($idpost) {
 
 	$post->updateTags();
 
+	// var_dump($_FILES);
+	// exit;
+
+	if (isset($_FILES['desimage']) && $_FILES['desimage'] != "")
+	{
+		if ($_FILES['desimage']['error'] === 0) 
+		{
+			$post->setPhoto($_FILES['desimage']);
+		} else {
+			Post::setError("File upload error!");
+			header("Location: /admin/posts/create");
+			exit;
+		}
+	}
+	
 	Post::setSuccess("Post updated successfully!");
 	
 	header("Location: /admin/posts");

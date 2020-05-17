@@ -18,7 +18,7 @@
 	</div>
 	<?php } ?>
 
-	<form action="/admin/posts/<?php echo htmlspecialchars( $post["idpost"], ENT_COMPAT, 'UTF-8', FALSE ); ?>/update" method="POST">
+	<form action="/admin/posts/<?php echo htmlspecialchars( $post["idpost"], ENT_COMPAT, 'UTF-8', FALSE ); ?>/update" method="POST" enctype="multipart/form-data">
 		<div class="form-group">
 			<label for="destittle">Tittle</label>
 			<input type="text" class="form-control" value="<?php echo htmlspecialchars( $post["destittle"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" id="destittle" name="destittle">
@@ -47,12 +47,12 @@
 		</div>
 		<div class="form-row py-2">
 			<div class="col-sm-4">
-				<img src="/res/img/post-<?php echo htmlspecialchars( $post["idpost"], ENT_COMPAT, 'UTF-8', FALSE ); ?>.png" class="img-thumbnail">
+				<img src="/res/img/post - <?php echo htmlspecialchars( $post["idpost"], ENT_COMPAT, 'UTF-8', FALSE ); ?>.jpg" class="img-thumbnail">
 			</div>
 			<div class="col-sm-8 form-group py-2">
 				<div class="form-group">
 					<label for="desimage">Upload a image</label>
-					<input type="file" class="form-control-file" id="desimage" name="desimage">
+					<input type="file" value="<?php echo htmlspecialchars( $post["desimage"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" class="form-control-file" id="desimage" name="desimage">
 				</div>
 			</div>
 		</div>

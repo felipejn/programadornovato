@@ -18,7 +18,7 @@
 	</div>
 	<?php } ?>
 
-	<form action="/admin/posts/create" method="POST">
+	<form action="/admin/posts/create" method="POST" enctype="multipart/form-data">
 		<div class="form-group">
 			<label for="destittle">Tittle</label>
 			<input type="text" class="form-control" id="destittle" name="destittle">
