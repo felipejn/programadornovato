@@ -15,6 +15,7 @@ require_once("admin-posts.php");
 require_once("admin-tags.php");
 require_once("site.php");
 require_once("admin.php");
+require_once("functions.php");
 
 $app->run();
 

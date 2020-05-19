@@ -5,45 +5,35 @@
 	<div class="row">
 		<!-- Content -->
 		<div class="col-sm-8">
+			
 			<!-- Post Loop -->
+			<?php $counter1=-1;  if( isset($posts) && ( is_array($posts) || $posts instanceof Traversable ) && sizeof($posts) ) foreach( $posts as $key1 => $value1 ){ $counter1++; ?><?php if( $value1["despub"] == true ){ ?>
+
 			<div class="row" style="box-shadow: 5px 5px 5px gray;">
 				<div class="col-sm-12">
 					<!-- Title -->
-					<h1 style="font-family: 'Bree Serif', serif; font-size: 30px; padding-bottom: 2rem;">SQL: Aprenda a utilizar a chave primária e a chave estrangeira</h1>
+					<h1 style="font-family: 'Bree Serif', serif; font-size: 30px; padding-bottom: 2rem;"><?php echo htmlspecialchars( $value1["destittle"], ENT_COMPAT, 'UTF-8', FALSE ); ?></h1>
+					<p style="font-family: 'Bree Serif', serif;"><?php echo formatDate($value1["dtregister"]); ?> • <?php $counter2=-1; $newvar2=getSelectedTags($value1["idpost"]); if( isset($newvar2) && ( is_array($newvar2) || $newvar2 instanceof Traversable ) && sizeof($newvar2) ) foreach( $newvar2 as $key2 => $value2 ){ $counter2++; ?><a href="#">#<?php echo htmlspecialchars( $value2["destag"], ENT_COMPAT, 'UTF-8', FALSE ); ?> </a><?php } ?></p>
+					<hr>
 					<!-- Content Text -->
-					<div class="col-sm-6 center-block">	
-						<img class="img-responsive" width="500px" height="auto" style="margin: 2rem;" src="https://pplware.sapo.pt/wp-content/uploads/2017/12/mysql-720x415.jpg">
+					<?php if( checkPostImage($value1["idpost"]) === true ){ ?>
+
+					<div class="col-sm-12 center-block">	
+						<img class="img-responsive" height="auto" style="margin: 2rem;" src="<?php echo getPostImage($value1["idpost"]); ?>">
 					</div>
-					<div class="col-sm-6">
-						<p style="font-family: 'Roboto Slab', serif; font-size: 18px;">A Linguagem SQL traz muitos conceitos importantes. Entre eles, os conceitos de chave primária e chave estrangeira. Tais opções são essenciais para definirmos, principalmente, os relacionamentos entre as entidades de uma base de dados. Diante disso, esse artigo visa apresentar esses conceitos, colocando cada um dentro de seu escopo e mostrando como e quando utilizá-los.</p>
-						<a href="https://www.devmedia.com.br/sql-aprenda-a-utilizar-a-chave-primaria-e-a-chave-estrangeira/37636" style="font-family: 'Roboto Slab', serif; font-size: 18px;">Leia mais...</a>
+					<?php } ?>
+
+					<div class="col-sm-12">
+						<p style="font-family: 'Roboto Slab', serif; font-size: 18px;"><?php echo htmlspecialchars( $value1["destext"], ENT_COMPAT, 'UTF-8', FALSE ); ?></p>
+						<?php if( isset($value1["deslink"]) && $value1["deslink"] != '' ){ ?><a href="<?php echo htmlspecialchars( $value1["deslink"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" style="font-family: 'Roboto Slab', serif; font-size: 18px;">Leia mais...</a><?php } ?>
+
 					</div>
 					<hr>
-					<small style="font-family: 'Lora', serif;">TAGS: <a href="#">#SQL</a> <a href="#">#PHP</a></small>
 				</div>
 			</div>
 			<div class="row" style="padding-top: 2rem;"></div>
-			<!-- Post Loop End -->
-			<!-- Post Loop -->
-			<div class="row" style="box-shadow: 5px 5px 5px gray;">
-				<div class="col-sm-12">
-					<!-- Title -->
-					<h1 style="font-family: 'Bree Serif', serif; font-size: 30px; padding-bottom: 2rem;">Guia prático para começar com o git sem preocupação</h1>
-					<!-- Content Text -->
-					<div class="col-sm-6 center-block">
-						<img class="img-responsive"  src="https://www.hostinger.com.br/tutoriais/wp-content/uploads/sites/12/2019/04/Como-Usar-Um-Git-Branch.png">
-					</div>
-					<div class="col-sm-6">	
-						<p style="font-family: 'Roboto Slab', serif; font-size: 18px;">Você já deve ter se deparado com tutoriais
-						de Git onde mostram dezenas de comandos complicados e isso assusta, certo? Para facilitar, Roger Dudler
-						criou esse guia prático para mostrar os comandos mais usados e suas funções.</p>
-						<a href="https://rogerdudler.github.io/git-guide/index.pt_BR.html" style="font-family: 'Roboto Slab', serif; font-size: 18px;">Leia mais...</a>
-					</div>	
-					<hr>
-					<small style="font-family: 'Lora', serif;">TAGS: <a href="#">#GIT</a> <a href="#">#PHP</a></small>
-				</div>
-			</div>
-			<div class="row" style="padding-top: 2rem;"></div>
+			<?php } ?><?php } ?>
+
 			<!-- Post Loop End -->
 			
 			<!-- Pagination -->

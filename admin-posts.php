@@ -46,7 +46,7 @@ $app->post("/admin/posts/create", function() {
 		exit;
 	}
 
-	$_POST['despub'] = (isset($_POST['despub']) && $_POST['despub'] == "on") ? 1 : 0;
+	$_POST['despub'] = (isset($_POST['despub']) && $_POST['despub'] == "on") ? true : false;
 
 	$post = new Post();
 
@@ -56,13 +56,16 @@ $app->post("/admin/posts/create", function() {
 
 	$post->setTags();
 
-	if ($_FILES['desimage']['error'] === 0) 
+	if (isset($_FILES['desimage']['name']) && $_FILES['desimage']['name'] != "")
 	{
-		$post->setPhoto($_FILES['desimage']);
-	} else {
-		Post::setError("File upload error!");
-		header("Location: /admin/posts/create");
-		exit;
+		if ($_FILES['desimage']['error'] === 0) 
+		{
+			$post->setImage($_FILES['desimage']);
+		} else {
+			Post::setError("File upload error!");
+			header("Location: /admin/posts/create");
+			exit;
+		}
 	}
 	
 	header("Location: /admin/posts");
@@ -164,7 +167,7 @@ $app->post("/admin/posts/:idpost/update", function($idpost) {
 		exit;
 	}
 
-	$_POST['despub'] = (isset($_POST['despub']) && $_POST['despub'] == "on") ? 1 : 0;
+	$_POST['despub'] = (isset($_POST['despub']) && $_POST['despub'] == "on") ? true : false;
 
 	$post = new Post();
 
@@ -176,14 +179,11 @@ $app->post("/admin/posts/:idpost/update", function($idpost) {
 
 	$post->updateTags();
 
-	// var_dump($_FILES);
-	// exit;
-
-	if (isset($_FILES['desimage']) && $_FILES['desimage'] != "")
+	if (isset($_FILES['desimage']['name']) && $_FILES['desimage']['name'] != "")
 	{
 		if ($_FILES['desimage']['error'] === 0) 
 		{
-			$post->setPhoto($_FILES['desimage']);
+			$post->setImage($_FILES['desimage']);
 		} else {
 			Post::setError("File upload error!");
 			header("Location: /admin/posts/create");

@@ -42,11 +42,11 @@
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#">TAGS
 						<span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="#">PHP</a></li>
-							<li><a href="#">JavaScript</a></li>
-							<li><a href="#">CSS</a></li>
-							<li><a href="#">GIT</a></li>
-							<li><a href="#">SQL</a></li>
+							<?php $counter1=-1; $newvar1=getAllTags(); if( isset($newvar1) && ( is_array($newvar1) || $newvar1 instanceof Traversable ) && sizeof($newvar1) ) foreach( $newvar1 as $key1 => $value1 ){ $counter1++; ?>
+
+							<li><a href="#"><?php echo htmlspecialchars( $value1["destag"], ENT_COMPAT, 'UTF-8', FALSE ); ?></a></li>
+							<?php } ?>
+
 						</ul>
 					</li>
 					<li><a href="#">SOBRE</a></li>

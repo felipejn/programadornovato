@@ -35,14 +35,14 @@
 			<label for="tags">Tags</label>
 			<div class="form-check" id="tags">
 				{loop="$tags"}
-				<input class="form-check-input" {if="isset($value.desstatus) && $value.desstatus == 1"} Checked {/if} type="checkbox" name="idtag{$value.idtag}" id="{$value.destag}">
+				<input class="form-check-input" {if="$value.desstatus === true"} Checked {/if} type="checkbox" name="idtag{$value.idtag}" id="{$value.destag}">
 				<label class="form-check-label pr-5" for="{$value.destag}">{$value.destag}</label>
 				{/loop}
 			</div>
 		</div>
 		<div class="form-row py-2">
 			<div class="col-sm-4">
-				<img src="/res/img/post - {$post.idpost}.jpg" class="img-thumbnail">
+				<img src="{function="getPostImage($post.idpost)"}" class="img-thumbnail">
 			</div>
 			<div class="col-sm-8 form-group py-2">
 				<div class="form-group">

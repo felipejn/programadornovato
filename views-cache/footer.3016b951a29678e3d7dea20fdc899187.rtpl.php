@@ -2,23 +2,17 @@
 		<div class="col-sm-4" style="text-align: center; font-size: 20px;">
 			<h2 style="font-family: 'Bree Serif', serif; font-size: 25px;">Últimas publicações</h2>
 			<!-- Loop -->
-			<!-- Link 1 -->
+			<?php $counter1=-1; $newvar1=getAllPosts(); if( isset($newvar1) && ( is_array($newvar1) || $newvar1 instanceof Traversable ) && sizeof($newvar1) ) foreach( $newvar1 as $key1 => $value1 ){ $counter1++; ?><?php if( $value1["despub"] == true ){ ?>
+
 			<div class="row" style="padding-top: 1rem;">
 				<div class="col-sm-12">
-					<a href="#"><code>SQL: Aprenda a utilizar a chave primária e a chave estrangeira</code></a>
+					<a href="#"><code><?php echo htmlspecialchars( $value1["destittle"], ENT_COMPAT, 'UTF-8', FALSE ); ?></code></a>
 					<hr>
 				</div>
 			</div>
 			<!-- Fim do Loop -->
-			<!-- Loop -->
-			<!-- Link 2 -->
-			<div class="row" style="padding-top: 1rem;">
-				<div class="col-sm-12">
-					<a href="#"><code>Guia prático para começar com o git sem preocupação</code></a>
-					<hr>
-				</div>
-			</div>
-			<!-- Fim do Loop -->
+			<?php } ?><?php } ?>
+
 			<a href="#" style="font-family: Bree Serif, serif;">Ver todas</a>
 		</div>
 		<!-- Sidebar End -->

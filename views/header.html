@@ -42,11 +42,9 @@
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#">TAGS
 						<span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="#">PHP</a></li>
-							<li><a href="#">JavaScript</a></li>
-							<li><a href="#">CSS</a></li>
-							<li><a href="#">GIT</a></li>
-							<li><a href="#">SQL</a></li>
+							{loop="getAllTags()"}
+							<li><a href="#">{$value.destag}</a></li>
+							{/loop}
 						</ul>
 					</li>
 					<li><a href="#">SOBRE</a></li>

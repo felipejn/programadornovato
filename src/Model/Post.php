@@ -101,10 +101,12 @@ class Post extends Model
 		$alltags = Tag::listAll();
 
 		for ($i=0; $i <	count($alltags); $i++) { 
+			$alltags[$i]['desstatus'] = false;
 			for ($j=0; $j < count($usedtags); $j++) { 
 				if ($alltags[$i]['idtag'] === $usedtags[$j]['idtag'])
 				{
-					$alltags[$i]['desstatus'] = 1;
+					$alltags[$i]['desstatus'] = true;
+					break;
 				} 
 			} 
 		}
@@ -205,11 +207,18 @@ class Post extends Model
 			':idpost'=>$this->getidpost()
 		]);
 
+		$path = $_SERVER["DOCUMENT_ROOT"] . DIRECTORY_SEPARATOR . 
+			"res" . DIRECTORY_SEPARATOR . 
+			"img". DIRECTORY_SEPARATOR .
+			"post-".$this->getidpost().".jpg";
+
+		if (file_exists($path)) unlink($path);
+
 	}
 
 	public function changeStatus()
 	{
-		$newstatus = ($this->getdespub() !== NULL && $this->getdespub() == 0) ? 1 : 0;
+		$newstatus = ($this->getdespub() !== NULL && $this->getdespub() == false) ? true : false;
 		
 		$sql = new Sql();
 		
@@ -220,7 +229,7 @@ class Post extends Model
 
 	}
 
-	public function setPhoto($file)
+	public function setImage($file)
 	{
 
 		$extension = explode(".", $file["name"]);
@@ -246,7 +255,7 @@ class Post extends Model
 		$path = $_SERVER["DOCUMENT_ROOT"] . DIRECTORY_SEPARATOR . 
 			"res" . DIRECTORY_SEPARATOR . 
 			"img". DIRECTORY_SEPARATOR .
-			"post - ".$this->getidpost() . ".jpg";
+			"post-".$this->getidpost().".jpg";
 
 		imagejpeg($image, $path);
 

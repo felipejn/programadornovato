@@ -39,7 +39,7 @@
 			<div class="form-check" id="tags">
 				<?php $counter1=-1;  if( isset($tags) && ( is_array($tags) || $tags instanceof Traversable ) && sizeof($tags) ) foreach( $tags as $key1 => $value1 ){ $counter1++; ?>
 
-				<input class="form-check-input" <?php if( isset($value1["desstatus"]) && $value1["desstatus"] == 1 ){ ?> Checked <?php } ?> type="checkbox" name="idtag<?php echo htmlspecialchars( $value1["idtag"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" id="<?php echo htmlspecialchars( $value1["destag"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
+				<input class="form-check-input" <?php if( $value1["desstatus"] === true ){ ?> Checked <?php } ?> type="checkbox" name="idtag<?php echo htmlspecialchars( $value1["idtag"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" id="<?php echo htmlspecialchars( $value1["destag"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
 				<label class="form-check-label pr-5" for="<?php echo htmlspecialchars( $value1["destag"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><?php echo htmlspecialchars( $value1["destag"], ENT_COMPAT, 'UTF-8', FALSE ); ?></label>
 				<?php } ?>
 
@@ -47,7 +47,7 @@
 		</div>
 		<div class="form-row py-2">
 			<div class="col-sm-4">
-				<img src="/res/img/post - <?php echo htmlspecialchars( $post["idpost"], ENT_COMPAT, 'UTF-8', FALSE ); ?>.jpg" class="img-thumbnail">
+				<img src="<?php echo getPostImage($post["idpost"]); ?>" class="img-thumbnail">
 			</div>
 			<div class="col-sm-8 form-group py-2">
 				<div class="form-group">

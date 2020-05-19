@@ -37,9 +37,9 @@
 		<td><?php echo htmlspecialchars( $value1["desname"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
 		<td><?php echo htmlspecialchars( $value1["destittle"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
 		<td><?php echo htmlspecialchars( $value1["dtregister"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
-		<td><?php if( $value1["despub"] == 0 ){ ?> No <?php }else{ ?> Yes <?php } ?></td>
+		<td><?php if( $value1["despub"] == false ){ ?> No <?php }else{ ?> Yes <?php } ?></td>
 		<td><div class="btn-group-sm" role="group" aria-label="Button group with nested dropdown">
-		  <a class="btn btn-primary" href="/admin/posts/<?php echo htmlspecialchars( $value1["idpost"], ENT_COMPAT, 'UTF-8', FALSE ); ?>/changestatus" role="button"><?php if( $value1["despub"] == 0 ){ ?> Publish <?php }else{ ?> Unpublish <?php } ?></a>
+		  <a class="btn btn-primary" href="/admin/posts/<?php echo htmlspecialchars( $value1["idpost"], ENT_COMPAT, 'UTF-8', FALSE ); ?>/changestatus" role="button"><?php if( $value1["despub"] == false ){ ?> Publish <?php }else{ ?> Unpublish <?php } ?></a>
 		  <a class="btn btn-secondary" href="/admin/posts/<?php echo htmlspecialchars( $value1["idpost"], ENT_COMPAT, 'UTF-8', FALSE ); ?>/update" role="button">Edit</a>
 		  <a class="btn btn-danger" onclick="return confirm('Are you sure you want to delete?')" href="/admin/posts/<?php echo htmlspecialchars( $value1["idpost"], ENT_COMPAT, 'UTF-8', FALSE ); ?>/delete" role="button">Delete</a>
 		</td>
