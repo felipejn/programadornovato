@@ -287,6 +287,22 @@ class Post extends Model
 
 	}
 
+	public static function getByUrl($desurl)
+	{
+
+		$sql = new Sql();
+
+		$results = $sql->select("SELECT * FROM tb_posts a
+			INNER JOIN tb_users b
+			USING(iduser)
+			WHERE desurl = :desurl", [
+			':desurl'=>$desurl
+		]);
+
+		return $results[0];
+
+	}
+
 }
 
 ?>

@@ -6,6 +6,17 @@ use \Pronov\Model\User;
 use \Pronov\Model\Post;
 use \Pronov\Model\Tag;
 
+// Post Page
+$app->get("/posts/:desurl", function($desurl) {
+	
+	$page = new Page();
+
+	$page->setTpl("post", [
+		'post'=>Post::getByUrl($desurl)
+	]);
+
+});
+
 // Site
 $app->get("/", function() {
 

@@ -1,0 +1,42 @@
+
+<!-- Main Container -->
+<div class="container" style="min-height: 500px;">
+	<div class="row">
+		<!-- Content -->
+		<div class="col-sm-8">
+			
+			<!-- Post Loop -->
+			<div class="row" style="box-shadow: 5px 5px 5px gray;">
+				<div class="col-sm-12">
+					<!-- Title -->
+					<h1 style="font-family: 'Bree Serif', serif; font-size: 30px; padding-bottom: 2rem;">{$post.destittle}</h1>
+					<p style="font-family: 'Bree Serif', serif;">{function="formatDate($post.dtregister)"} • {loop="getSelectedTags($post.idpost)"}<a href="#">#{$value.destag} </a>{/loop}</p>
+					<hr>
+					<!-- Content Text -->
+					{if="checkPostImage($post.idpost) === true"}
+					<div class="col-sm-12 center-block">	
+						<img class="img-responsive" height="auto" src="{function="getPostImage($post.idpost)"}">
+					</div>
+					{/if}
+					<div class="col-sm-12">
+						<p style="font-family: 'Roboto Slab', serif; font-size: 18px; text-align: justify;">{$post.destext}</p>
+						{if="isset($post.deslink) && $post.deslink != ''"}<a href="{$post.deslink}" style="font-family: 'Roboto Slab', serif; font-size: 18px;">Leia mais...</a>{/if}
+					</div>
+					<hr>
+				</div>
+			</div>
+			<div class="row" style="padding-top: 2rem;"></div>
+	
+			<!-- Post Loop End -->
+			
+			<!-- Pagination -->
+			<nav aria-label="Page navigation" class="text-center">
+					<ul class="pagination">
+						{loop="$pages"}
+						<li><a href="{$post.link}">{$post.page}</a></li>
+						{/loop}
+					</ul>
+			</nav>
+			<!-- Pagination End -->
+		</div>
+		<!-- Content End -->

@@ -6,7 +6,7 @@
 
 			<div class="row" style="padding-top: 1rem;">
 				<div class="col-sm-12">
-					<a href="#"><code><?php echo htmlspecialchars( $value1["destittle"], ENT_COMPAT, 'UTF-8', FALSE ); ?></code></a>
+					<a href="/posts/<?php echo htmlspecialchars( $value1["desurl"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><code><?php echo htmlspecialchars( $value1["destittle"], ENT_COMPAT, 'UTF-8', FALSE ); ?></code></a>
 					<hr>
 				</div>
 			</div>

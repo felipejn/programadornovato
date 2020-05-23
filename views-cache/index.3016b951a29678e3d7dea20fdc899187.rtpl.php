@@ -19,7 +19,7 @@
 					<?php if( checkPostImage($value1["idpost"]) === true ){ ?>
 
 					<div class="col-sm-12 center-block">	
-						<img class="img-responsive" height="auto" style="margin: 2rem;" src="<?php echo getPostImage($value1["idpost"]); ?>">
+						<img class="img-responsive" height="auto" src="<?php echo getPostImage($value1["idpost"]); ?>">
 					</div>
 					<?php } ?>
 
