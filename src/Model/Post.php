@@ -11,7 +11,7 @@ class Post extends Model
 	const ERROR = "PostError";
 	const SUCCESS = "PostSuccess";
 
-	public static function listAll()
+	public static function listAll($limit = 10000)
 	{
 
 		$sql = new Sql();
@@ -20,6 +20,7 @@ class Post extends Model
 			INNER JOIN tb_users b
 			USING(iduser)
 			ORDER BY idpost DESC
+			LIMIT 0, $limit
 		");
 
 	}
@@ -260,6 +261,29 @@ class Post extends Model
 		imagejpeg($image, $path);
 
 		imagedestroy($image);
+
+	}
+
+	public function getPostPages($page = 1, $itemsPerPage = 5)
+	{
+
+		$start = ($page - 1) * $itemsPerPage;
+
+		$sql = new Sql();
+
+		$results = $sql->select("SELECT SQL_CALC_FOUND_ROWS * FROM tb_posts a
+			INNER JOIN tb_users b
+			USING(iduser)
+			ORDER BY idpost DESC
+			LIMIT $start, $itemsPerPage");
+
+		$resultTotal = $sql->select("SELECT FOUND_ROWS() AS nrtotal");
+
+		return array(
+			'posts'=>$results,
+			'total'=>(int)$resultTotal[0]['nrtotal'],
+			'pages'=>ceil($resultTotal[0]['nrtotal'] / $itemsPerPage)
+		);
 
 	}
 

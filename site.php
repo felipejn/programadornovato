@@ -9,10 +9,26 @@ use \Pronov\Model\Tag;
 // Site
 $app->get("/", function() {
 
+	$post = new Post();
+
+	$page = (int)($_GET['page'] ?? 1);
+
+	$pagination = $post->getPostPages($page);
+
+	$pages = [];
+
+	for ($i = 1; $i <= $pagination['pages']; $i++) { 
+		array_push($pages, [
+			'link'=>"/?page=".$i,
+			'page'=>$i
+		]);
+	}
+
 	$page = new Page();
 
 	$page->setTpl("index", [
-		'posts'=>Post::listAll()
+		'posts'=>$pagination['posts'],
+		'pages'=>$pages
 	]);
 
 });

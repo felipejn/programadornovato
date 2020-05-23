@@ -1,6 +1,6 @@
 
 <!-- Main Container -->
-<div class="container">
+<div class="container" style="min-height: 500px;">
 	<div class="row">
 		<!-- Content -->
 		<div class="col-sm-8">
@@ -20,7 +20,7 @@
 					</div>
 					{/if}
 					<div class="col-sm-12">
-						<p style="font-family: 'Roboto Slab', serif; font-size: 18px;">{$value.destext}</p>
+						<p style="font-family: 'Roboto Slab', serif; font-size: 18px; text-align: justify;">{$value.destext}</p>
 						{if="isset($value.deslink) && $value.deslink != ''"}<a href="{$value.deslink}" style="font-family: 'Roboto Slab', serif; font-size: 18px;">Leia mais...</a>{/if}
 					</div>
 					<hr>
@@ -33,21 +33,9 @@
 			<!-- Pagination -->
 			<nav aria-label="Page navigation" class="text-center">
 					<ul class="pagination">
-						<li>
-							<a href="#" aria-label="Previous">
-							<span aria-hidden="true">&laquo;</span>
-							</a>
-						</li>
-						<li><a href="#">1</a></li>
-						<li><a href="#">2</a></li>
-						<li><a href="#">3</a></li>
-						<li><a href="#">4</a></li>
-						<li><a href="#">5</a></li>
-						<li>
-							<a href="#" aria-label="Next">
-							<span aria-hidden="true">&raquo;</span>
-							</a>
-						</li>
+						{loop="$pages"}
+						<li><a href="{$value.link}">{$value.page}</a></li>
+						{/loop}
 					</ul>
 			</nav>
 			<!-- Pagination End -->

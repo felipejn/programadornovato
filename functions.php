@@ -56,10 +56,10 @@ function getSelectedTags($idpost)
 
 }
 
-function getAllPosts()
+function getNPosts($n=5)
 {
 
-	return Post::listAll();
+	return Post::listAll($n);
 
 }
 

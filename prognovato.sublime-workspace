@@ -519,32 +519,6 @@
 	},
 	"buffers":
 	[
-		{
-			"file": "index.php",
-			"settings":
-			{
-				"buffer_size": 6640,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "views/admin/posts.html",
-			"settings":
-			{
-				"buffer_size": 1531,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "src/Model/Post.php",
-			"settings":
-			{
-				"buffer_size": 2143,
-				"line_ending": "Unix"
-			}
-		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -602,14 +576,21 @@
 	],
 	"file_history":
 	[
-		"/Users/felipe/Documents/programadorNovato/views/admin/create-user.html",
+		"/Users/felipe/Downloads/CV-Europass-20200505-Nascimento-PT.xml",
 		"/Users/felipe/Documents/programadorNovato/src/Model/Post.php",
+		"/Users/felipe/Documents/programadorNovato/admin-posts.php",
+		"/Users/felipe/Documents/programadorNovato/index.php",
+		"/Users/felipe/Documents/programadorNovato/views/admin/posts.html",
+		"/Users/felipe/Documents/programadorNovato/site.php",
+		"/Users/felipe/Documents/programadorNovato/admin.php",
+		"/Users/felipe/Documents/programadorNovato/admin-tags.php",
+		"/Users/felipe/Documents/programadorNovato/admin-users.php",
+		"/Users/felipe/Documents/programadorNovato/src/Model/User.php",
+		"/Users/felipe/Documents/programadorNovato/views/admin/create-user.html",
 		"/Users/felipe/Documents/programadorNovato/views/admin/create-post.html",
 		"/Users/felipe/Desktop/Coding/Projeto E Commerce/Arquivos Hcode/Criação banco de dados projeto.sql",
-		"/Users/felipe/Documents/programadorNovato/src/Model/User.php",
 		"/Users/felipe/Documents/programadorNovato/src/Model/Tag.php",
 		"/Users/felipe/Documents/programadorNovato/views/admin/rename-tag.html",
-		"/Users/felipe/Documents/programadorNovato/views/admin/posts.html",
 		"/Users/felipe/Documents/programadorNovato/views/admin/footer.html",
 		"/Users/felipe/Documents/programadorNovato/views/admin/header.html",
 		"/Users/felipe/Documents/programadorNovato/views/admin/index.html",
@@ -637,7 +618,6 @@
 		"/Users/felipe/Desktop/Coding/Projeto E Commerce/loja/vendor/hcodebr/php-classes/src/DB/Sql.php",
 		"/Users/felipe/Documents/programadorNovato/res/css/styles.css",
 		"/Users/felipe/Desktop/Coding/Projeto E Commerce/loja/vendor/hcodebr/php-classes/src/Model.php",
-		"/Users/felipe/Documents/programadorNovato/index.php",
 		"/Users/felipe/Documents/programadorNovato/res/site/css/styles.css",
 		"/Users/felipe/Documents/programadorNovato/views/index.html",
 		"/Users/felipe/Desktop/Coding/Projeto E Commerce/loja/res/admin/pages/layout/fixed-sidebar.html",
@@ -723,13 +703,7 @@
 		"/Users/felipe/Documents/projeto_website/views/login.html",
 		"/Users/felipe/Documents/projeto_website/vendor/hcodebr/php-classes/src/Mailer.php",
 		"/Users/felipe/Desktop/Coding/Projeto E Commerce/121 - Web Service de CEP/sp_addresses_save.sql",
-		"/Users/felipe/Desktop/Coding/Projeto E Commerce/121 - Web Service de CEP/tb_addresses.sql",
-		"/Users/felipe/Documents/projeto_website/views/profile.html",
-		"/Users/felipe/Documents/projeto_website/views/admin/users-update.html",
-		"/Users/felipe/Documents/projeto_website/admin.php",
-		"/Users/felipe/Desktop/Coding/Projeto E Commerce/Criação banco de dados projeto.sql",
-		"/Users/felipe/Documents/projeto_website/views/product-detail.html",
-		"/Users/felipe/Documents/projeto_website/views/category.html"
+		"/Users/felipe/Desktop/Coding/Projeto E Commerce/121 - Web Service de CEP/tb_addresses.sql"
 	],
 	"find":
 	{
@@ -766,96 +740,8 @@
 	"groups":
 	[
 		{
-			"selected": 0,
 			"sheets":
 			[
-				{
-					"buffer": 0,
-					"file": "index.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 6640,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								7,
-								7
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "views/admin/posts.html",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1531,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								837,
-								837
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "src/Model/Post.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2143,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				}
 			]
 		}
 	],
@@ -935,7 +821,7 @@
 	"show_minimap": false,
 	"show_open_files": true,
 	"show_tabs": true,
-	"side_bar_visible": true,
+	"side_bar_visible": false,
 	"side_bar_width": 296.0,
 	"status_bar_visible": true,
 	"template_settings":
