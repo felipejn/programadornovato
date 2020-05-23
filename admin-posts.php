@@ -79,10 +79,26 @@ $app->get("/admin/posts", function() {
 
 	User::checkUser();
 
+	$post = new Post();
+
+	$page = (int)($_GET['page'] ?? 1);
+
+	$pagination = $post->getPostPages($page, $itemsPerPage = 15);
+
+	$pages = [];
+
+	for ($i = 1; $i <= $pagination['pages']; $i++) { 
+		array_push($pages, [
+			'link'=>"/admin/posts?page=".$i,
+			'page'=>$i
+		]);
+	}
+
 	$page = new PageAdmin();
 
 	$page->setTpl("posts", [
-		'posts'=>Post::listAll(),
+		'posts'=>$pagination['posts'],
+		'pages'=>$pages,
 		'success'=>Post::getSuccess()
 	]);
 

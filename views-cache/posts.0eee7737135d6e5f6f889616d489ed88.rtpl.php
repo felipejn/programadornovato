@@ -49,6 +49,19 @@
 	<!-- Loop end -->
 	</tbody>
 	</table>
+	<!-- Pagination -->
+	<div class="container">
+		<nav aria-label="Page navigation" class="text-center">
+			<ul class="pagination justify-content-center">
+				<?php $counter1=-1;  if( isset($pages) && ( is_array($pages) || $pages instanceof Traversable ) && sizeof($pages) ) foreach( $pages as $key1 => $value1 ){ $counter1++; ?>
+
+				<li class="page-item"><a class="page-link" href="<?php echo htmlspecialchars( $value1["link"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><?php echo htmlspecialchars( $value1["page"], ENT_COMPAT, 'UTF-8', FALSE ); ?></a></li>
+				<?php } ?>
+
+			</ul>
+		</nav>
+	</div>
+	<!-- Pagination End -->
 </div>
 <!-- Content end -->
 

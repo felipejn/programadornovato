@@ -44,6 +44,17 @@
 	<!-- Loop end -->
 	</tbody>
 	</table>
+	<!-- Pagination -->
+	<div class="container">
+		<nav aria-label="Page navigation" class="text-center">
+			<ul class="pagination justify-content-center">
+				{loop="$pages"}
+				<li class="page-item"><a class="page-link" href="{$value.link}">{$value.page}</a></li>
+				{/loop}
+			</ul>
+		</nav>
+	</div>
+	<!-- Pagination End -->
 </div>
 <!-- Content end -->
 
