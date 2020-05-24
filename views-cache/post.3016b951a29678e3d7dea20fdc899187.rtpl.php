@@ -11,7 +11,7 @@
 				<div class="col-sm-12">
 					<!-- Title -->
 					<h1 style="font-family: 'Bree Serif', serif; font-size: 30px; padding-bottom: 2rem;"><?php echo htmlspecialchars( $post["destittle"], ENT_COMPAT, 'UTF-8', FALSE ); ?></h1>
-					<p style="font-family: 'Bree Serif', serif;"><?php echo formatDate($post["dtregister"]); ?> • <?php $counter1=-1; $newvar1=getSelectedTags($post["idpost"]); if( isset($newvar1) && ( is_array($newvar1) || $newvar1 instanceof Traversable ) && sizeof($newvar1) ) foreach( $newvar1 as $key1 => $value1 ){ $counter1++; ?><a href="#">#<?php echo htmlspecialchars( $value1["destag"], ENT_COMPAT, 'UTF-8', FALSE ); ?> </a><?php } ?></p>
+					<p style="font-family: 'Bree Serif', serif;"><?php echo formatDate($post["dtregister"]); ?><?php $counter1=-1; $newvar1=getSelectedTags($post["idpost"]); if( isset($newvar1) && ( is_array($newvar1) || $newvar1 instanceof Traversable ) && sizeof($newvar1) ) foreach( $newvar1 as $key1 => $value1 ){ $counter1++; ?><a href="#"> • #<?php echo htmlspecialchars( $value1["destag"], ENT_COMPAT, 'UTF-8', FALSE ); ?> </a><?php } ?></p>
 					<hr>
 					<!-- Content Text -->
 					<?php if( checkPostImage($post["idpost"]) === true ){ ?>
@@ -21,7 +21,7 @@
 					</div>
 					<?php } ?>
 
-					<div class="col-sm-12">
+					<div class="col-sm-12" style="padding-bottom: 2rem; padding-top: 2rem;">
 						<p style="font-family: 'Roboto Slab', serif; font-size: 18px; text-align: justify;"><?php echo htmlspecialchars( $post["destext"], ENT_COMPAT, 'UTF-8', FALSE ); ?></p>
 						<?php if( isset($post["deslink"]) && $post["deslink"] != '' ){ ?><a href="<?php echo htmlspecialchars( $post["deslink"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" style="font-family: 'Roboto Slab', serif; font-size: 18px;">Leia mais...</a><?php } ?>
 

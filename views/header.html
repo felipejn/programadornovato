@@ -43,15 +43,15 @@
 						<span class="caret"></span></a>
 						<ul class="dropdown-menu">
 							{loop="getAllTags()"}
-							<li><a href="#">{$value.destag}</a></li>
+							<li><a href="/tags/{$value.destag}">{$value.destag}</a></li>
 							{/loop}
 						</ul>
 					</li>
-					<li><a href="#">SOBRE</a></li>
+					<li><a href="/posts/apresentacao-hello-world">SOBRE</a></li>
 				</ul>
-				<form class="navbar-form navbar-left" action="#" method="GET">
+				<form class="navbar-form navbar-left" action="/" method="GET">
 					<div class="form-group">
-						<input type="text" class="form-control" placeholder="Procurar..." name="search" id="search">
+						<input type="text" class="form-control" placeholder="Procurar..." name="search" id="search" value="{if="isset($search.search) && $search.search != ''"}{$search}{/if}">
 						<button><i class="fas fa-search"></i></button>
 					</div>
 				</form>	

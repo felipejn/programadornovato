@@ -44,16 +44,16 @@
 						<ul class="dropdown-menu">
 							<?php $counter1=-1; $newvar1=getAllTags(); if( isset($newvar1) && ( is_array($newvar1) || $newvar1 instanceof Traversable ) && sizeof($newvar1) ) foreach( $newvar1 as $key1 => $value1 ){ $counter1++; ?>
 
-							<li><a href="#"><?php echo htmlspecialchars( $value1["destag"], ENT_COMPAT, 'UTF-8', FALSE ); ?></a></li>
+							<li><a href="/tags/<?php echo htmlspecialchars( $value1["destag"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><?php echo htmlspecialchars( $value1["destag"], ENT_COMPAT, 'UTF-8', FALSE ); ?></a></li>
 							<?php } ?>
 
 						</ul>
 					</li>
-					<li><a href="#">SOBRE</a></li>
+					<li><a href="/posts/apresentacao-hello-world">SOBRE</a></li>
 				</ul>
-				<form class="navbar-form navbar-left" action="#" method="GET">
+				<form class="navbar-form navbar-left" action="/" method="GET">
 					<div class="form-group">
-						<input type="text" class="form-control" placeholder="Procurar..." name="search" id="search">
+						<input type="text" class="form-control" placeholder="Procurar..." name="search" id="search" value="<?php if( isset($search["search"]) && $search["search"] != '' ){ ?><?php echo htmlspecialchars( $search, ENT_COMPAT, 'UTF-8', FALSE ); ?><?php } ?>">
 						<button><i class="fas fa-search"></i></button>
 					</div>
 				</form>	

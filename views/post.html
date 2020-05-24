@@ -10,7 +10,7 @@
 				<div class="col-sm-12">
 					<!-- Title -->
 					<h1 style="font-family: 'Bree Serif', serif; font-size: 30px; padding-bottom: 2rem;">{$post.destittle}</h1>
-					<p style="font-family: 'Bree Serif', serif;">{function="formatDate($post.dtregister)"} • {loop="getSelectedTags($post.idpost)"}<a href="#">#{$value.destag} </a>{/loop}</p>
+					<p style="font-family: 'Bree Serif', serif;">{function="formatDate($post.dtregister)"}{loop="getSelectedTags($post.idpost)"}<a href="#"> • #{$value.destag} </a>{/loop}</p>
 					<hr>
 					<!-- Content Text -->
 					{if="checkPostImage($post.idpost) === true"}
@@ -18,7 +18,7 @@
 						<img class="img-responsive" height="auto" src="{function="getPostImage($post.idpost)"}">
 					</div>
 					{/if}
-					<div class="col-sm-12">
+					<div class="col-sm-12" style="padding-bottom: 2rem; padding-top: 2rem;">
 						<p style="font-family: 'Roboto Slab', serif; font-size: 18px; text-align: justify;">{$post.destext}</p>
 						{if="isset($post.deslink) && $post.deslink != ''"}<a href="{$post.deslink}" style="font-family: 'Roboto Slab', serif; font-size: 18px;">Leia mais...</a>{/if}
 					</div>

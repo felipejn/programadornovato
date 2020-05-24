@@ -83,7 +83,7 @@ $app->get("/admin/posts", function() {
 
 	$page = (int)($_GET['page'] ?? 1);
 
-	$pagination = $post->getPostPages($page, $itemsPerPage = 15);
+	$pagination = $post->getPosts($page, $itemsPerPage = 15);
 
 	$pages = [];
 

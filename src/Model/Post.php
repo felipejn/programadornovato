@@ -74,7 +74,7 @@ class Post extends Model
 	public function setTags()
 	{
 
-		foreach ($this->getvalues() as $key => $value) {
+		foreach ($this->getValues() as $key => $value) {
 			if (substr($key, 0, 5) == "idtag")
 			{
 				$idtag = substr($key, 5);
@@ -264,7 +264,7 @@ class Post extends Model
 
 	}
 
-	public function getPostPages($page = 1, $itemsPerPage = 5)
+	public function getPosts($page = 1, $itemsPerPage = 5)
 	{
 
 		$start = ($page - 1) * $itemsPerPage;
@@ -274,20 +274,68 @@ class Post extends Model
 		$results = $sql->select("SELECT SQL_CALC_FOUND_ROWS * FROM tb_posts a
 			INNER JOIN tb_users b
 			USING(iduser)
-			ORDER BY idpost DESC
+			ORDER BY a.idpost DESC
 			LIMIT $start, $itemsPerPage");
 
-		$resultTotal = $sql->select("SELECT FOUND_ROWS() AS nrtotal");
+		if (count($results) > 0)
+		{
+			$resultTotal = $sql->select("SELECT FOUND_ROWS() as nrtotal");
 
-		return array(
-			'posts'=>$results,
-			'total'=>(int)$resultTotal[0]['nrtotal'],
-			'pages'=>ceil($resultTotal[0]['nrtotal'] / $itemsPerPage)
-		);
+			return array(
+				'posts'=>$results,
+				'total'=>(int)$resultTotal[0]['nrtotal'],
+				'pages'=>ceil($resultTotal[0]['nrtotal'] / $itemsPerPage)
+			);
+		}
 
 	}
 
-	public static function getByUrl($desurl)
+	public function getSearchPosts($search, $page = 1, $itemsPerPage = 10)
+	{
+
+		$start = ($page - 1) * $itemsPerPage;
+
+		$sql = new Sql();
+
+		$results = $sql->select("SELECT SQL_CALC_FOUND_ROWS * FROM tb_posts a
+			INNER JOIN tb_users b USING(iduser)
+			INNER JOIN tb_poststags c USING(idpost)
+			INNER JOIN tb_tags d USING(idtag)
+			WHERE a.destittle LIKE :search OR b.desname LIKE :search OR d.destag LIKE :search
+			ORDER BY a.idpost DESC
+			LIMIT $start, $itemsPerPage", [
+			':search'=>'%'.$search.'%'
+		]);
+
+		if (count($results) > 0)
+		{
+			$resultTotal = $sql->select("SELECT FOUND_ROWS() as nrtotal");
+		
+			$filteredResults = [];
+			
+			for ($i=0; $i < count($results); $i++) { 
+				
+				if ($i == 0)
+				{
+					array_push($filteredResults, $results[$i]);
+				} 
+				elseif ($results[$i-1]['idpost'] !== $results[$i]['idpost'])
+				{
+					array_push($filteredResults, $results[$i]);	
+				}
+
+			}
+			
+			return array(
+				'posts'=>$filteredResults,
+				'total'=>(int)$resultTotal[0]['nrtotal'],
+				'pages'=>ceil($resultTotal[0]['nrtotal'] / $itemsPerPage)
+			);
+		}
+
+	}
+
+	public function getByUrl($desurl)
 	{
 
 		$sql = new Sql();
@@ -299,7 +347,48 @@ class Post extends Model
 			':desurl'=>$desurl
 		]);
 
-		return $results[0];
+		if (count($results) > 0)
+		{
+			return $this->setData($results[0]);
+		
+		} else {
+			
+			throw new \Exception("Publicação não encontrada!", 1);			
+			exit;
+
+		}
+	}
+
+	public function getByTag($destag, $page = 1, $itemsPerPage = 5)
+	{
+
+		$start = ($page - 1) * $itemsPerPage;
+
+		$sql = new Sql();
+
+		$results = $sql->select("SELECT SQL_CALC_FOUND_ROWS * FROM tb_posts a
+			INNER JOIN tb_users b
+			USING(iduser)
+			INNER JOIN tb_poststags c
+			USING(idpost)
+			INNER JOIN tb_tags d
+			USING(idtag)
+			WHERE d.destag = :destag
+			ORDER BY a.idpost DESC
+			LIMIT $start, $itemsPerPage", [
+			'destag'=>$destag
+		]);
+
+		if (count($results) > 0)
+		{
+			$resultTotal = $sql->select("SELECT FOUND_ROWS() as nrtotal");
+
+			return array(
+				'posts'=>$results,
+				'total'=>(int)$resultTotal[0]['nrtotal'],
+				'pages'=>ceil($resultTotal[0]['nrtotal'] / $itemsPerPage)
+			);
+		}
 
 	}
 
