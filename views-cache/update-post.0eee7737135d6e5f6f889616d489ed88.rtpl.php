@@ -58,7 +58,8 @@
 		</div>
 		<div class="form-group py-2">
 		    <label for="destext">Text</label>
-		    <textarea class="form-control" id="destext" name="destext" rows="10"><?php echo htmlspecialchars( $post["destext"], ENT_COMPAT, 'UTF-8', FALSE ); ?></textarea>
+			<textarea class="form-control" id="destext" name="destext" rows="10"><?php echo htmlspecialchars( $post["destext"], ENT_COMPAT, 'UTF-8', FALSE ); ?></textarea>
+			<script>CKEDITOR.replace('destext');</script>
 		</div>
 		<div class="form-group form-check">
 		    <input type="checkbox" <?php if( $post["despub"] == 1 ){ ?> checked <?php } ?> class="form-check-input" id="despub" name="despub">

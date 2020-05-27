@@ -58,7 +58,8 @@
 		</div>
 		<div class="form-group py-2">
 		    <label for="destext">Text</label>
-		    <textarea class="form-control" id="destext" name="destext" rows="10"></textarea>
+			<textarea class="form-control" id="destext" name="destext" rows="10"></textarea>
+			<script>CKEDITOR.replace('destext');</script>
 		</div>
 		<div class="form-group form-check">
 		    <input type="checkbox" class="form-check-input" id="despub" name="despub">

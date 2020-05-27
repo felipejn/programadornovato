@@ -37,8 +37,10 @@
 					</div>
 					{/if}
 					<div class="col-sm-12" style="padding-top: 2rem; padding-bottom: 2rem;">
-						<p style="font-family: 'Roboto Slab', serif; font-size: 18px; text-align: justify;">{$value.destext}</p>
+						{autoescape="off"}
+						<div style="font-family: 'Roboto Slab', serif; font-size: 18px; text-align: justify;">{$value.destext}</div>
 						{if="isset($value.deslink) && $value.deslink != ''"}<a href="{$value.deslink}" style="font-family: 'Roboto Slab', serif; font-size: 18px;">Leia mais...</a>{/if}
+						{/autoescape}
 					</div>
 					<hr>
 				</div>

@@ -7,6 +7,8 @@
 
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<!-- CK Editor 4 Basic -->
+<script src="//cdn.ckeditor.com/4.14.0/basic/ckeditor.js"></script>
 <!-- Styles and Fonts -->
 <script src="https://kit.fontawesome.com/f1151761e4.js" crossorigin="anonymous"></script>
 <link href="https://fonts.googleapis.com/css2?family=Bree+Serif&display=swap" rel="stylesheet">

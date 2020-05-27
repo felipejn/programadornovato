@@ -45,9 +45,11 @@
 					<?php } ?>
 
 					<div class="col-sm-12" style="padding-top: 2rem; padding-bottom: 2rem;">
-						<p style="font-family: 'Roboto Slab', serif; font-size: 18px; text-align: justify;"><?php echo htmlspecialchars( $value1["destext"], ENT_COMPAT, 'UTF-8', FALSE ); ?></p>
-						<?php if( isset($value1["deslink"]) && $value1["deslink"] != '' ){ ?><a href="<?php echo htmlspecialchars( $value1["deslink"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" style="font-family: 'Roboto Slab', serif; font-size: 18px;">Leia mais...</a><?php } ?>
+						
+						<div style="font-family: 'Roboto Slab', serif; font-size: 18px; text-align: justify;"><?php echo $value1["destext"]; ?></div>
+						<?php if( isset($value1["deslink"]) && $value1["deslink"] != '' ){ ?><a href="<?php echo $value1["deslink"]; ?>" style="font-family: 'Roboto Slab', serif; font-size: 18px;">Leia mais...</a><?php } ?>
 
+						
 					</div>
 					<hr>
 				</div>

@@ -96,9 +96,6 @@ $app->post("/subscribe", function() {
 		
 		$subscriber = new User();
 
-		// var_dump($_POST);
-		// exit;
-
 		$subscriber->setData($_POST);
 
 		$subscriber->saveSubscriber();
