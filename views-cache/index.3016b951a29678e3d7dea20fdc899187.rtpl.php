@@ -6,6 +6,27 @@
 		<!-- Content -->
 		<div class="col-sm-8">
 			
+			<!-- Success Message -->
+			<?php if( $success != '' ){ ?>
+
+			<div class="alert alert-success alert-dismissible" role="alert">
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span>
+				</button>
+				<center><?php echo htmlspecialchars( $success, ENT_COMPAT, 'UTF-8', FALSE ); ?></center>
+			</div>
+			<?php } ?>
+
+			<!-- Error message -->
+			<?php if( $error != '' ){ ?>
+
+			<div class="alert alert-danger alert-dismissible" role="alert">
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+						aria-hidden="true">&times;</span>
+				</button>
+				<center><?php echo htmlspecialchars( $error, ENT_COMPAT, 'UTF-8', FALSE ); ?></center>
+			</div>
+			<?php } ?>
+
 			<!-- Post Loop -->
 			<?php $counter1=-1;  if( isset($posts) && ( is_array($posts) || $posts instanceof Traversable ) && sizeof($posts) ) foreach( $posts as $key1 => $value1 ){ $counter1++; ?><?php if( $value1["despub"] == true ){ ?>
 

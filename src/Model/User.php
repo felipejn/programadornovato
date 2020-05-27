@@ -240,6 +240,36 @@ class User extends Model
 		$_SESSION[User::SUCCESS] = NULL;
 
 	}
+	
+	public function saveSubscriber()
+	{
+
+		$sql = new Sql();
+
+		$results = $sql->select("SELECT * FROM tb_subscribers WHERE dessubscriber = :dessubscriber", [
+			':dessubscriber'=>$this->getdessubscriber()
+		]);
+
+		// var_dump($results);
+		// exit;
+		
+		if (count($results) > 0)
+		{
+
+			Post::setError("Este email já foi cadastrado.");
+			header("Location: /");
+			exit;
+
+		} else {
+
+			$sql->query("INSERT INTO tb_subscribers (dessubscriber) VALUES(:dessubscriber)", [
+				':dessubscriber'=>$this->getdessubscriber()
+			]);
+
+		}
+
+	}
+
 
 }
 

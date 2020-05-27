@@ -39,7 +39,9 @@ $app->get("/", function() {
 	$page->setTpl("index", [
 		'posts'=>$pagination['posts'],
 		'pages'=>$pages,
-		'search'=>$search
+		'search'=>$search,
+		'success'=>Post::getSuccess(),
+		'error'=>Post::getError()
 	]);
 
 });
@@ -83,6 +85,35 @@ $app->get("/tags/:destag", function($destag) {
 		'posts'=>$pagination['posts'],
 		'pages'=>$pages
 	]);
+
+});
+
+// Subscribe
+$app->post("/subscribe", function() {
+
+	if (isset($_POST['dessubscriber']) && $_POST['dessubscriber'] != "")
+	{
+		
+		$subscriber = new User();
+
+		// var_dump($_POST);
+		// exit;
+
+		$subscriber->setData($_POST);
+
+		$subscriber->saveSubscriber();
+
+		Post::setSuccess("Inscrição realizada com sucesso!");
+		header("Location: /");
+		exit;
+
+	} else {
+
+		Post::setError("Insira um email válido!");
+		header("Location: /");
+		exit;
+
+	}
 
 });
 
