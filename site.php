@@ -83,7 +83,9 @@ $app->get("/tags/:destag", function($destag) {
 
 	$page->setTpl("index", [
 		'posts'=>$pagination['posts'],
-		'pages'=>$pages
+		'pages'=>$pages,
+		'success'=>Post::getSuccess(),
+		'error'=>Post::getError()
 	]);
 
 });

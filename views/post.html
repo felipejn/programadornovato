@@ -18,9 +18,12 @@
 						<img class="img-responsive" height="auto" src="{function="getPostImage($post.idpost)"}">
 					</div>
 					{/if}
-					<div class="col-sm-12" style="padding-bottom: 2rem; padding-top: 2rem;">
-						<p style="font-family: 'Roboto Slab', serif; font-size: 18px; text-align: justify;">{$post.destext}</p>
-						{if="isset($post.deslink) && $post.deslink != ''"}<a href="{$post.deslink}" style="font-family: 'Roboto Slab', serif; font-size: 18px;">Leia mais...</a>{/if}
+					<div class="col-sm-12" style="padding-top: 2rem; padding-bottom: 2rem;">
+						{autoescape="off"}
+						<div style="font-family: 'Roboto Slab', serif; font-size: 18px; text-align: justify;">{$post.destext}</div>
+						{if="isset($post.deslink) && $post.deslink != ''"}<a href="{$post.deslink}"
+							style="font-family: 'Roboto Slab', serif; font-size: 18px;">Leia mais...</a>{/if}
+						{/autoescape}
 					</div>
 					<hr>
 				</div>

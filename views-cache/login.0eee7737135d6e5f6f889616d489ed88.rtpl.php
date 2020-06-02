@@ -25,6 +25,22 @@
 
 </head>
 <body>
+<!-- Success message -->
+<?php if( $success != '' ){ ?>
+
+<div class="container">
+	<div class="col-sm-12" style="padding-top: 5rem;">
+		<div class="alert alert-success alert-dismissible" role="alert">
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+					aria-hidden="true">&times;</span>
+			</button>
+			<center><?php echo htmlspecialchars( $success, ENT_COMPAT, 'UTF-8', FALSE ); ?></center>
+		</div>
+	</div>
+</div>
+<?php } ?>
+
+
 <!-- Error message -->
 <?php if( $error != '' ){ ?>
 
@@ -56,7 +72,8 @@
 				<div class="form-group">	
 					<label for="password">Password:</label>
 					<input type="password" class="form-control" name="despassword" id="despassword">
-					<a style="color: lightgray;" href="#">Forgot the password!</a>
+					<br/>
+					<a style="color: lightgray;" href="/admin/login/forgot">Forgot password?</a>
 				</div>
 				<div class="form-group">
 					<button class="btn btn-default" type="submit">Submit</button>

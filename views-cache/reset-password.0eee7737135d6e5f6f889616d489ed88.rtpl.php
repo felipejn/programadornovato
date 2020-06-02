@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<?php if(!class_exists('Rain\Tpl')){exit;}?><!DOCTYPE html>
 <html lang="pt">
 <head>
 	<title>programador NOVATO</title>
@@ -25,51 +25,38 @@
 
 </head>
 <body>
-<!-- Success message -->
-{if="$success != ''"}
-<div class="container">
-	<div class="col-sm-12" style="padding-top: 5rem;">
-		<div class="alert alert-success alert-dismissible" role="alert">
-			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
-					aria-hidden="true">&times;</span>
-			</button>
-			<center>{$success}</center>
-		</div>
-	</div>
-</div>
-{/if}
-
 <!-- Error message -->
-{if="$error != ''"}
+<?php if( $error != '' ){ ?>
+
 <div class="container">
 	<div class="col-sm-12" style="padding-top: 5rem;">
 		<div class="alert alert-danger alert-dismissible" role="alert">
 		  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span>
 		  </button>
-		  <center>{$error}</center>
+		  <center><?php echo htmlspecialchars( $error, ENT_COMPAT, 'UTF-8', FALSE ); ?></center>
 		</div>
 	</div>	
 </div>
-{/if}
+<?php } ?>
+
 <!-- Error message end -->
 <div class="container" style="margin-top: 10rem;">
 	<div class="row">
 		<div class="col-sm-3"></div>
-		<!-- Login box -->
+		<!-- Box -->
 		<div class="col-sm-6 loginbox" style="background-color: #8f9779;">
 			<div class="col-sm-12 text-center" style="font-family: 'Bree Serif', serif;">
-					<h2><span style="font-size: 31px; color: white; padding: 2px;">{programador}</span><b> NOVATO</b></h1>
+					<h2><span style="font-size: 31px; color: white; padding: 2px;">Password Reset</span></h1>
 			</div>		
-			<form action="/admin/login" method="POST">
+			<form action="/admin/login/reset" method="POST">
+				<input type="hidden" name="code" value="<?php echo htmlspecialchars( $code, ENT_COMPAT, 'UTF-8', FALSE ); ?>">
 				<div class="form-group">
-					<label for="email">Login:</label>
-					<input type="email" class="form-control" name="desemail" id="desemail">
+					<label for="despassword">New Password:</label>
+					<input type="password" class="form-control" name="despassword" id="despassword">
 				</div>
 				<div class="form-group">	
-					<label for="password">Password:</label>
-					<input type="password" class="form-control" name="despassword" id="despassword">
-					<br/>
-					<a style="color: lightgray;" href="/admin/login/forgot">Forgot password?</a>
+					<label for="verifypassword">Confirm Password:</label>
+					<input type="password" class="form-control" name="verifypassword" id="verifypassword">
 				</div>
 				<div class="form-group">
 					<button class="btn btn-default" type="submit">Submit</button>
