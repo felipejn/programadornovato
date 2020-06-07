@@ -265,7 +265,7 @@ class User extends Model
 		if (count($results) > 0)
 		{
 
-			Post::setError("Este email já foi cadastrado.");
+			Post::setError("This email has already been used.");
 			header("Location: /");
 			exit;
 
@@ -349,21 +349,28 @@ class User extends Model
 
 		if (count($results) === 0)
 		{
-			User::setError("It was not possible to reset your password.");
+					
+			User::setError("This code has been already used or it is expired.");
 			header("Location: /admin/login");
 			exit;
 
-		} else {
-			
-			$sql->query("UPDATE tb_pswdrecovery 
+		} 
+
+		return $results[0];
+
+	}
+
+	// Set recovery time to disable code
+	public static function setRecoveryTime($idrecovery)
+	{
+
+		$sql = new Sql();
+
+		$sql->query("UPDATE tb_pswdrecovery 
 				SET dtrecovery = CURRENT_TIMESTAMP
 				WHERE idrecovery = :idrecovery", [
 				'idrecovery'=>$idrecovery
 			]);
-			
-			return $results[0];
-
-		}
 
 	}
 

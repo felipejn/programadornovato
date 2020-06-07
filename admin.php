@@ -126,6 +126,8 @@ $app->post("/admin/login/reset", function() {
 
 		$user->update();
 
+		User::setRecoveryTime($recovery['idrecovery']);
+
 		User::setSuccess("Your password has been successfully reset.");
 		
 		header("Location: /admin/login");
