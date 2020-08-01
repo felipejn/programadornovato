@@ -4,12 +4,10 @@ namespace Pronov\Model;
 
 use Pronov\Sql;
 use Pronov\Model;
+use Pronov\Message;
 
 class Tag extends Model
 {
-
-	const ERROR = "TagError";
-	const SUCCESS = "TagSuccess";
 	
 	public static function listAll()
 	{
@@ -31,7 +29,7 @@ class Tag extends Model
 
 		if (count($check) > 0)
 		{
-			Tag::setError("This tag name already exists.");
+			Message::setError("This tag name already exists.");
 			header("Location: /admin/tags/create");
 			exit;
 		
@@ -66,56 +64,6 @@ class Tag extends Model
 		$sql->query("DELETE FROM tb_tags WHERE idtag = :idtag", [
 			':idtag'=>$this->getidtag()
 		]);
-
-	}
-
-	public static function setError($msg)
-	{
-
-		$_SESSION[Tag::ERROR] = $msg;
-
-	}
-
-	public static function getError()
-	{
-
-		$msg = (isset($_SESSION[Tag::ERROR]) && $_SESSION[Tag::ERROR]) ? $_SESSION[Tag::ERROR] : "" ;
-
-		Tag::clearError();
-
-		return $msg;
-
-	}
-
-	public static function clearError()
-	{
-
-		$_SESSION[Tag::ERROR] = NULL;
-
-	}
-
-	public static function setSuccess($msg)
-	{
-
-		$_SESSION[Tag::SUCCESS] = $msg;
-
-	}
-
-	public static function getSuccess()
-	{
-
-		$msg = (isset($_SESSION[Tag::SUCCESS]) && $_SESSION[Tag::SUCCESS]) ? $_SESSION[Tag::SUCCESS] : "" ;
-
-		Tag::clearSuccess();
-
-		return $msg;
-
-	}
-
-	public static function clearSuccess()
-	{
-
-		$_SESSION[Tag::SUCCESS] = NULL;
 
 	}
 

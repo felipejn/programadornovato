@@ -3,6 +3,13 @@
 namespace Pronov;
 
 class Sql {
+
+	// const HOSTNAME = '81.88.52.62';
+	// const USERNAME = 'xl3vjqxg_felipe';
+	// const PASSWORD = 'eYaSJBQ)t$bf';
+	// const PORT = '3306';
+	// const DBNAME = 'xl3vjqxg_prognovato_db';
+
 	
 	// Localhost
 	const HOSTNAME = "127.0.0.1";

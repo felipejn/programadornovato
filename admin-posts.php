@@ -4,7 +4,8 @@ use \Pronov\Page;
 use \Pronov\PageAdmin;
 use \Pronov\Model\User;
 use \Pronov\Model\Post;
-use \Pronov\Model\Tag;  
+use \Pronov\Model\Tag;
+use \Pronov\Message;  
 
 // Create Post
 $app->get("/admin/posts/create", function() {
@@ -15,7 +16,7 @@ $app->get("/admin/posts/create", function() {
 
 	$page->setTpl("create-post", [
 		'tags'=>Tag::listAll(),
-		'error'=>Post::getError()
+		'error'=>Message::getError()
 	]);
 
 });
@@ -27,21 +28,21 @@ $app->post("/admin/posts/create", function() {
 
 	if (!isset($_POST['destittle']) || !$_POST['destittle'])
 	{
-		Post::setError("Fill in the tittle field.");
+		Message::setError("Fill in the tittle field.");
 		header("Location: /admin/posts/create");
 		exit;
 	}
 
 	if (!isset($_POST['desurl']) || !$_POST['desurl'])
 	{
-		Post::setError("Fill in the url field.");
+		Message::setError("Fill in the url field.");
 		header("Location: /admin/posts/create");
 		exit;
 	}
 
 	if (!isset($_POST['destext']) || !$_POST['destext'])
 	{
-		Post::setError("Fill in the text field.");
+		Message::setError("Fill in the text field.");
 		header("Location: /admin/posts/create");
 		exit;
 	}
@@ -62,7 +63,7 @@ $app->post("/admin/posts/create", function() {
 		{
 			$post->setImage($_FILES['desimage']);
 		} else {
-			Post::setError("File upload error!");
+			Message::setError("File upload error!");
 			header("Location: /admin/posts/create");
 			exit;
 		}
@@ -99,7 +100,7 @@ $app->get("/admin/posts", function() {
 	$page->setTpl("posts", [
 		'posts'=>$pagination['posts'],
 		'pages'=>$pages,
-		'success'=>Post::getSuccess()
+		'success'=>Message::getSuccess()
 	]);
 
 });
@@ -152,7 +153,7 @@ $app->get("/admin/posts/:idpost/update", function($idpost) {
 	$page->setTpl("update-post", [
 		'post'=>$post->getValues(),
 		'tags'=>$post->getTags(),
-		'error'=>Post::getError()
+		'error'=>Message::getError()
 	]);
 
 });
@@ -164,21 +165,21 @@ $app->post("/admin/posts/:idpost/update", function($idpost) {
 
 	if (!isset($_POST['destittle']) || !$_POST['destittle'])
 	{
-		Post::setError("Fill in the tittle field.");
+		Message::setError("Fill in the tittle field.");
 		header("Location: /admin/posts/create");
 		exit;
 	}
 
 	if (!isset($_POST['desurl']) || !$_POST['desurl'])
 	{
-		Post::setError("Fill in the url field.");
+		Message::setError("Fill in the url field.");
 		header("Location: /admin/posts/create");
 		exit;
 	}
 
 	if (!isset($_POST['destext']) || !$_POST['destext'])
 	{
-		Post::setError("Fill in the text field.");
+		Message::setError("Fill in the text field.");
 		header("Location: /admin/posts/create");
 		exit;
 	}
@@ -201,13 +202,13 @@ $app->post("/admin/posts/:idpost/update", function($idpost) {
 		{
 			$post->setImage($_FILES['desimage']);
 		} else {
-			Post::setError("File upload error!");
+			Message::setError("File upload error!");
 			header("Location: /admin/posts/create");
 			exit;
 		}
 	}
 	
-	Post::setSuccess("Post updated successfully!");
+	Message::setSuccess("Post updated successfully!");
 	
 	header("Location: /admin/posts");
 

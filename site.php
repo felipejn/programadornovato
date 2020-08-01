@@ -5,6 +5,7 @@ use \Pronov\PageAdmin;
 use \Pronov\Model\User;
 use \Pronov\Model\Post;
 use \Pronov\Model\Tag;
+use \Pronov\Message;
 
 // Site
 $app->get("/", function() {
@@ -40,8 +41,8 @@ $app->get("/", function() {
 		'posts'=>$pagination['posts'],
 		'pages'=>$pages,
 		'search'=>$search,
-		'success'=>Post::getSuccess(),
-		'error'=>Post::getError()
+		'success'=>Message::getSuccess(),
+		'error'=>Message::getError()
 	]);
 
 });
@@ -84,8 +85,8 @@ $app->get("/tags/:destag", function($destag) {
 	$page->setTpl("index", [
 		'posts'=>$pagination['posts'],
 		'pages'=>$pages,
-		'success'=>Post::getSuccess(),
-		'error'=>Post::getError()
+		'success'=>Message::getSuccess(),
+		'error'=>Message::getError()
 	]);
 
 });
@@ -102,13 +103,13 @@ $app->post("/subscribe", function() {
 
 		$subscriber->saveSubscriber();
 
-		Post::setSuccess("Inscrição realizada com sucesso!");
+		Message::setSuccess("Inscrição realizada com sucesso!");
 		header("Location: /");
 		exit;
 
 	} else {
 
-		Post::setError("Insira um email válido!");
+		Message::setError("Insira um email válido!");
 		header("Location: /");
 		exit;
 

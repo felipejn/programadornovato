@@ -4,12 +4,10 @@ namespace Pronov\Model;
 
 use Pronov\Model;
 use Pronov\Sql;
+use Pronov\Message;
 
 class Post extends Model
 {
-
-	const ERROR = "PostError";
-	const SUCCESS = "PostSuccess";
 
 	public static function listAll($limit = 10000)
 	{
@@ -49,7 +47,7 @@ class Post extends Model
 
 		if (count($check) > 0)
 		{
-			Post::setError("This url has already been used.");
+			Message::setError("This url has already been used.");
 			header("Location: /admin/posts/create");
 			exit;
 		
@@ -146,56 +144,6 @@ class Post extends Model
 		]);
 
 		$this->setTags();
-
-	}
-
-	public static function setError($msg)
-	{
-
-		$_SESSION[Post::ERROR] = $msg;
-
-	}
-
-	public static function getError()
-	{
-
-		$msg = (isset($_SESSION[Post::ERROR]) && $_SESSION[Post::ERROR]) ? $_SESSION[Post::ERROR] : "" ;
-
-		Post::clearError();
-
-		return $msg;
-
-	}
-
-	public static function clearError()
-	{
-
-		$_SESSION[Post::ERROR] = NULL;
-
-	}
-
-	public static function setSuccess($msg)
-	{
-
-		$_SESSION[Post::SUCCESS] = $msg;
-
-	}
-
-	public static function getSuccess()
-	{
-
-		$msg = (isset($_SESSION[Post::SUCCESS]) && $_SESSION[Post::SUCCESS]) ? $_SESSION[Post::SUCCESS] : "" ;
-
-		Post::clearSuccess();
-
-		return $msg;
-
-	}
-
-	public static function clearSuccess()
-	{
-
-		$_SESSION[Post::SUCCESS] = NULL;
 
 	}
 

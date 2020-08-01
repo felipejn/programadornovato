@@ -5,6 +5,7 @@ use \Pronov\PageAdmin;
 use \Pronov\Model\User;
 use \Pronov\Model\Post;
 use \Pronov\Model\Tag;
+use \Pronov\Message;
 
 // Admin Area
 $app->get("/admin", function() {
@@ -26,8 +27,8 @@ $app->get("/admin/login", function() {
 	]);
 
 	$page->setTpl("login", [
-		'success'=>User::getSuccess(),
-		'error'=>User::getError()
+		'success'=>Message::getSuccess(),
+		'error'=>Message::getError()
 	]);
 
 });
@@ -54,7 +55,7 @@ $app->get("/admin/login/forgot", function() {
 	]);
 
 	$page->setTpl("forgot", [
-		'error'=>User::getError()
+		'error'=>Message::getError()
 	]);
 
 });
@@ -96,7 +97,7 @@ $app->get("/admin/login/reset", function() {
 
 	$page->setTpl("reset-password", [
 		'code'=>$_GET['code'],
-		'error'=>User::getError()
+		'error'=>Message::getError()
 	]);
 
 });
@@ -113,7 +114,7 @@ $app->post("/admin/login/reset", function() {
 	if ($_POST['despassword'] != $_POST['verifypassword'])
 	{
 		
-		User::setError("Password and confirm password does not match.");
+		Message::setError("Password and confirm password does not match.");
 		header("Location: /admin/login/reset?code=".$_POST['code']);
 		exit;
 
@@ -128,7 +129,7 @@ $app->post("/admin/login/reset", function() {
 
 		User::setRecoveryTime($recovery['idrecovery']);
 
-		User::setSuccess("Your password has been successfully reset.");
+		Message::setSuccess("Your password has been successfully reset.");
 		
 		header("Location: /admin/login");
 
@@ -136,7 +137,7 @@ $app->post("/admin/login/reset", function() {
 
 	} else {
 
-		User::setError("Fill in new password field.");
+		Message::setError("Fill in new password field.");
 		header("Location: /admin/login/reset?code=".$_POST['code']);
 		exit;
 

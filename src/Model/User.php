@@ -5,14 +5,13 @@ namespace Pronov\Model;
 use Pronov\Sql;
 use Pronov\Model;
 use Pronov\Mailer;
+use Pronov\Message;
 
 class User extends Model
 {
 
 	const SECRET = "Progr_Nov_Secret"; //-> Deve ter 16 caracteres
 	const SECRET_IV = "Progr_Nov_Secret";
-	const ERROR = "UserError";
-	const SUCCESS = "UserSuccess";
 	const SESSION = "User";
 	const REC_EMAIL = "Recovery Email";
 
@@ -38,7 +37,7 @@ class User extends Model
 
 		if (count($check) > 0)
 		{
-			User::setError("This login already exists.");
+			Message::setError("This login already exists.");
 			header("Location: /admin/users/create");
 			exit;
 		
@@ -127,7 +126,7 @@ class User extends Model
 
 		if (count($results) === 0)
 		{
-			User::setError("Login or password incorrect.");
+			Message::setError("Login or password incorrect.");
 			
 			header("Location: /admin/login");
 			
@@ -149,7 +148,7 @@ class User extends Model
 
 		} else {
 
-			User::setError("Login or password incorrect.");
+			Message::setError("Login or password incorrect.");
 
 			header("Location: /admin/login");
 			
@@ -196,63 +195,15 @@ class User extends Model
 
 	}
 
-	public static function setError($msg)
-	{
-
-		$_SESSION[User::ERROR] = $msg;
-
-	}
-
-	public static function getError()
-	{
-
-		$msg = (isset($_SESSION[User::ERROR]) && $_SESSION[User::ERROR]) ? $_SESSION[User::ERROR] : "" ;
-
-		User::clearError();
-
-		return $msg;
-
-	}
-
-	public static function clearError()
-	{
-
-		$_SESSION[User::ERROR] = NULL;
-
-	}
-
+	// Logout from system
 	public static function logout()
 	{
 
 		$_SESSION[User::SESSION] = NULL;
 
 	}
-
-	public static function setSuccess($msg)
-	{
-
-		$_SESSION[User::SUCCESS] = $msg;
-
-	}
-
-	public static function getSuccess()
-	{
-
-		$msg = (isset($_SESSION[User::SUCCESS]) && $_SESSION[User::SUCCESS]) ? $_SESSION[User::SUCCESS] : "" ;
-
-		User::clearSuccess();
-
-		return $msg;
-
-	}
-
-	public static function clearSuccess()
-	{
-
-		$_SESSION[User::SUCCESS] = NULL;
-
-	}
 	
+	// Adds subscriber to database
 	public function saveSubscriber()
 	{
 
@@ -265,7 +216,7 @@ class User extends Model
 		if (count($results) > 0)
 		{
 
-			Post::setError("This email has already been used.");
+			Message::setError("This email has already been used.");
 			header("Location: /");
 			exit;
 
@@ -279,6 +230,7 @@ class User extends Model
 
 	}
 
+	// Get email from db and send email to reset password
 	public static function getForgot($email)
 	{
 
@@ -291,7 +243,7 @@ class User extends Model
 		if (count($results) === 0)
 		{
 			
-			User::setError("Invalid login.");
+			Message::setError("Invalid login.");
 			header("Location: /admin/login/forgot");
 			exit;
 		
@@ -306,7 +258,7 @@ class User extends Model
 			if (count($results2) === 0)
 			{
 
-				User::setError("It is not possible to recover your password. Database stored procedure error.");
+				Message::setError("It is not possible to recover your password. Database procedure error.");
 				header("Location: /admin/login/forgot");
 				exit;
 
@@ -331,6 +283,7 @@ class User extends Model
 
 	}
 
+	// Check recovery code 
 	public static function getIdRecoveryByCode($code)
 	{
 
@@ -350,7 +303,7 @@ class User extends Model
 		if (count($results) === 0)
 		{
 					
-			User::setError("This code has been already used or it is expired.");
+			Message::setError("This code has been already used or it is expired.");
 			header("Location: /admin/login");
 			exit;
 

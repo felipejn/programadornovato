@@ -5,6 +5,7 @@ use \Pronov\PageAdmin;
 use \Pronov\Model\User;
 use \Pronov\Model\Post;
 use \Pronov\Model\Tag;
+use \Pronov\Message;
 
 // Tags List
 $app->get("/admin/tags", function() {
@@ -15,7 +16,7 @@ $app->get("/admin/tags", function() {
 
 	$page->setTpl("tags", [
 		'tags'=>Tag::listAll(),
-		'success'=>Tag::getSuccess()
+		'success'=>Message::getSuccess()
 	]);
 
 });
@@ -28,7 +29,7 @@ $app->get("/admin/tags/create", function() {
 	$page = new PageAdmin();
 
 	$page->setTpl("create-tag", [
-		'error'=>Tag::getError()
+		'error'=>Message::getError()
 	]);
 
 });
@@ -40,7 +41,7 @@ $app->post("/admin/tags/create", function() {
 
 	if (!isset($_POST['destag']) || !$_POST['destag'])
 	{
-		Tag::setError("Fill in the name field");
+		Message::setError("Fill in the name field");
 		header("Location: /admin/tags/create");
 		exit;
 	}
@@ -87,7 +88,7 @@ $app->get("/admin/tags/:idtag/rename", function($idtag) {
 
 	$page->setTpl("rename-tag", [
 		'tag'=>$tag->getValues(),
-		'error'=>Tag::getError()
+		'error'=>Message::getError()
 	]);
 
 });
@@ -103,7 +104,7 @@ $app->post("/admin/tags/:idtag/rename", function($idtag) {
 
 	if (!isset($_POST['destag']) || !$_POST['destag'])
 	{
-		Tag::setErro("Fill in the tag name field.");
+		Message::setError("Fill in the tag name field.");
 		header("Location: /admin/tags/".$idtag."/rename");
 		exit;
 	}
@@ -112,7 +113,7 @@ $app->post("/admin/tags/:idtag/rename", function($idtag) {
 
 	$tag->update();
 
-	Tag::setSuccess("Tag renamed successfully.");
+	Message::setSuccess("Tag renamed successfully.");
 	
 	header("Location: /admin/tags");
 

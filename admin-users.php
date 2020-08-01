@@ -5,6 +5,7 @@ use \Pronov\PageAdmin;
 use \Pronov\Model\User;
 use \Pronov\Model\Post;
 use \Pronov\Model\Tag;
+use \Pronov\Message;
 
 // Delete User
 $app->get("/admin/users/:iduser/delete", function($iduser) {
@@ -32,7 +33,7 @@ $app->get("/admin/users", function() {
 
 	$page->setTpl("users", [
 		'users'=>User::listAll(),
-		'success'=>User::getSuccess()
+		'success'=>Message::getSuccess()
 	]);
 
 });
@@ -45,7 +46,7 @@ $app->get("/admin/users/create", function() {
 	$page = new PageAdmin();
 
 	$page->setTpl("create-user", [
-		'error'=>User::getError()
+		'error'=>Message::getError()
 	]);
 
 });
@@ -57,28 +58,28 @@ $app->post("/admin/users/create", function() {
 
 	if (!isset($_POST['desname']) || !$_POST['desname'])
 	{
-		User::setError("Fill in the name field.");
+		Message::setError("Fill in the name field.");
 		header("Location: /admin/users/create");
 		exit;
 	}
 
 	if (!isset($_POST['desemail']) || !$_POST['desemail'])
 	{
-		User::setError("Fill in the login field.");
+		Message::setError("Fill in the login field.");
 		header("Location: /admin/users/create");
 		exit;
 	}
 
 	if (!isset($_POST['despassword']) || !$_POST['despassword'])
 	{
-		User::setError("Fill in the password field.");
+		Message::setError("Fill in the password field.");
 		header("Location: /admin/users/create");
 		exit;
 	}
 
 	if ($_POST['despassword'] != $_POST['confirmpassword'])
 	{
-		User::setError("Password and confirm password does not match.");
+		Message::setError("Password and confirm password does not match.");
 		header("Location: /admin/users/create");
 		exit;
 	}
@@ -121,7 +122,7 @@ $app->get("/admin/users/:iduser/update", function($iduser) {
 
 	$page->setTpl("update-user", [
 		'user'=>$user->getValues(),
-		'error'=>User::getError(),
+		'error'=>Message::getError(),
 	]);
 
 });
@@ -137,21 +138,21 @@ $app->post("/admin/users/:iduser/update", function($iduser) {
 
 	if (!isset($_POST['desname']) || $_POST['desname'] == "")
 	{
-		User::setError("Fill in the name field.");
+		Message::setError("Fill in the name field.");
 		header("Location: /admin/users/".$iduser."/update");
 		exit;	
 	}
 
 	if (!isset($_POST['desemail']) || $_POST['desemail'] == "")
 	{
-		User::setError("Fill in the login field.");
+		Message::setError("Fill in the login field.");
 		header("Location: /admin/users/".$iduser."/update");
 		exit;	
 	}
 
 	if ($_POST['despassword'] != $_POST['verifypassword'])
 	{
-		User::setError("Password and confirm password does not match.");
+		Message::setError("Password and confirm password does not match.");
 		header("Location: /admin/users/".$iduser."/update");
 		exit;
 	}
@@ -172,7 +173,7 @@ $app->post("/admin/users/:iduser/update", function($iduser) {
 
 	$user->update();
 
-	User::setSuccess("Data updated successfully!");
+	Message::setSuccess("Data updated successfully!");
 
 	header("Location: /admin/users");
 
