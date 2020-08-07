@@ -9,10 +9,9 @@ use PHPMailer\PHPMailer\SMTP;
 class Mailer
 {
 
-	// const USERNAME = "felipejn@programadornovato.pt";
-	// const PASSWORD = "rhD0K2CIi3*0";
-	const USERNAME = "felipejnteste@gmail.com";
-	const PASSWORD = "f65j10n18";  
+	
+	const USERNAME = "";
+	const PASSWORD = "";  
 	const NAME_FROM = "Programador Novato";
 
 	private $mail;
