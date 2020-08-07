@@ -45,7 +45,7 @@ class Subscriber extends Model
 
 			$code = User::codeFromId($result[0]['idsubscriber']);
 
-			$link = "http://www.programadornovato.dev/unsubscribe?code=$code";
+			$link = "http://www.programadornovato.pt/unsubscribe?code=$code";
 
 			$mailer = new Mailer($this->getdessubscriber(), $this->getdessubscriber(), utf8_decode("Subscrição"), "new-subscriber", $data = [
 				'link'=>$link
