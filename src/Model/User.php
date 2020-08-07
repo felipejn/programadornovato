@@ -202,31 +202,12 @@ class User extends Model
 		$_SESSION[User::SESSION] = NULL;
 
 	}
-	
-	// Adds subscriber to database
-	public function saveSubscriber()
+
+	// Generate code from Id
+	public static function codeFromId($id)
 	{
 
-		$sql = new Sql();
-
-		$results = $sql->select("SELECT * FROM tb_subscribers WHERE dessubscriber = :dessubscriber", [
-			':dessubscriber'=>$this->getdessubscriber()
-		]);
-		
-		if (count($results) > 0)
-		{
-
-			Message::setError("This email has already been used.");
-			header("Location: /");
-			exit;
-
-		} else {
-
-			$sql->query("INSERT INTO tb_subscribers (dessubscriber) VALUES(:dessubscriber)", [
-				':dessubscriber'=>$this->getdessubscriber()
-			]);
-
-		}
+		return base64_encode(openssl_encrypt($id, "AES-128-CBC", User::SECRET, 0, User::SECRET_IV));
 
 	}
 
@@ -268,7 +249,7 @@ class User extends Model
 
 				$recoveryData = $results2[0];
 
-				$code = base64_encode(openssl_encrypt($recoveryData['idrecovery'], "AES-128-CBC", User::SECRET, 0, User::SECRET_IV));
+				$code = User::codeFromId($recoveryData['idrecovery']);
 
 				$link = "http://www.programadornovato.pt/admin/login/reset?code=$code";
 
@@ -283,11 +264,19 @@ class User extends Model
 
 	}
 
+	// Get Id From Code
+	public static function getIdFromCode($code)
+	{
+
+		return openssl_decrypt(base64_decode($code), "AES-128-CBC", User::SECRET, 0, User::SECRET_IV);
+
+	}
+
 	// Check recovery code 
 	public static function getIdRecoveryByCode($code)
 	{
 
-		$idrecovery = openssl_decrypt(base64_decode($code), "AES-128-CBC", User::SECRET, 0, User::SECRET_IV);
+		$idrecovery = User::getIdFromCode($code);
 
 		$sql = new Sql();
 

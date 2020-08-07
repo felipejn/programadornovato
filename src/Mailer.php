@@ -9,8 +9,9 @@ use PHPMailer\PHPMailer\SMTP;
 class Mailer
 {
 
+	
 	const USERNAME = "";
-	const PASSWORD = ""; 
+	const PASSWORD = "";  
 	const NAME_FROM = "Programador Novato";
 
 	private $mail;
@@ -49,16 +50,16 @@ class Mailer
 		$mail->SMTPDebug = SMTP::DEBUG_SERVER;
 
 		//Set the hostname of the mail server
-		$mail->Host = 'smtp-pt.securemail.pro';
-		// use
-		// $mail->Host = gethostbyname('smtp.gmail.com');
-		// if your network does not support SMTP over IPv6
+		// $mail->Host = 'smtp-pt.securemail.pro'; // Amen Host
+		$mail->Host = 'smtp.gmail.com'; // Gmail
 
 		//Set the SMTP port number - 587 for authenticated TLS, a.k.a. RFC4409 SMTP submission
-		$mail->Port = 465;
+		// $mail->Port = 465; // Amen Host
+		$mail->Port = 587; // Gmail
 
 		//Set the encryption mechanism to use - STARTTLS or SMTPS
-		$mail->SMTPSecure = 'ssl'; // PHPMailer::ENCRYPTION_STARTTLS;
+		// $mail->SMTPSecure = 'ssl'; // Amen Host
+		$mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; // Gmail
 
 		//Whether to use SMTP authentication
 		$mail->SMTPAuth = true;

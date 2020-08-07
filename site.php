@@ -5,6 +5,7 @@ use \Pronov\PageAdmin;
 use \Pronov\Model\User;
 use \Pronov\Model\Post;
 use \Pronov\Model\Tag;
+use \Pronov\Model\Subscriber;
 use \Pronov\Message;
 
 // Site
@@ -91,13 +92,13 @@ $app->get("/tags/:destag", function($destag) {
 
 });
 
-// Subscribe
+// Add subscriber
 $app->post("/subscribe", function() {
 
 	if (isset($_POST['dessubscriber']) && $_POST['dessubscriber'] != "")
 	{
-		
-		$subscriber = new User();
+
+		$subscriber = new Subscriber();
 
 		$subscriber->setData($_POST);
 
@@ -114,6 +115,19 @@ $app->post("/subscribe", function() {
 		exit;
 
 	}
+
+});
+
+// Delete Subscriber
+$app->get("/unsubscribe", function() {
+
+	$id = User::getIdFromCode($_GET['code']);
+
+	$subscriber = new Subscriber();
+
+	$subscriber->getFromId((int)$id);
+
+	$subscriber->delete();
 
 });
 
